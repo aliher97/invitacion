@@ -2,7 +2,11 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="format-detection" content="telephone=no">
 <title>Alina & Alex — Invitación</title>
 
 <style>
@@ -31,6 +35,9 @@
 html{
   scroll-behavior:smooth;
   cursor:none;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
 }
 
 body{
@@ -40,6 +47,9 @@ body{
   overflow-x:hidden;
   cursor:none;
   min-height:100vh;
+  -webkit-tap-highlight-color:transparent;
+  -webkit-touch-callout:none;
+  touch-action:manipulation;
 }
 
 /* Custom Cursor */
@@ -392,6 +402,9 @@ body{
   transition:all .3s ease;
   cursor:none;
   display:inline-block;
+  -webkit-tap-highlight-color:transparent;
+  user-select:none;
+  -webkit-user-select:none;
 }
 
 .btn::before{
@@ -489,28 +502,227 @@ footer{
   z-index:1;
 }
 
-/* Responsive */
-@media(max-width:768px){
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablet Landscape (1024px - 1199px) */
+@media(max-width:1199px){
+  .hero{
+    padding:60px 40px;
+  }
+  
+  .names h1{
+    font-size:clamp(70px, 12vw, 140px);
+  }
+  
+  .names h1:nth-child(2){
+    margin-left:80px;
+  }
+  
+  .ampersand{
+    font-size:clamp(55px, 10vw, 100px);
+  }
+  
+  .details{
+    padding:100px 40px;
+  }
+  
+  .detail-grid{
+    gap:50px;
+  }
+  
+  .cta-section{
+    padding:140px 40px;
+  }
+}
+
+/* Tablet Portrait (768px - 1023px) */
+@media(max-width:1023px){
+  .hero{
+    padding:50px 30px;
+  }
+  
+  .names h1{
+    font-size:clamp(60px, 11vw, 120px);
+  }
+  
+  .names h1:nth-child(2){
+    margin-left:60px;
+  }
+  
+  .ampersand{
+    font-size:clamp(45px, 9vw, 85px);
+  }
+  
+  .tagline{
+    font-size:clamp(14px, 2.2vw, 17px);
+    margin-top:45px;
+    padding:0 20px;
+  }
+  
+  .detail-grid{
+    grid-template-columns:repeat(2, 1fr);
+    gap:45px;
+  }
+  
+  .detail-item:last-child{
+    grid-column:span 2;
+    max-width:600px;
+    margin:0 auto;
+  }
+  
+  .detail-number{
+    font-size:60px;
+  }
+  
+  .cta-title{
+    font-size:clamp(34px, 5.5vw, 50px);
+    margin-bottom:50px;
+  }
+  
+  .geo-1{
+    width:350px;
+    height:350px;
+    top:-175px;
+    right:-175px;
+  }
+  
+  .geo-2{
+    width:280px;
+    height:280px;
+    bottom:-140px;
+    left:-140px;
+  }
+}
+
+/* Mobile Landscape & Tablet Small (481px - 767px) */
+@media(max-width:767px){
+  .hero{
+    padding:40px 24px;
+  }
+  
+  .label-tag{
+    font-size:10px;
+    letter-spacing:.35em;
+    padding:10px 24px;
+    margin-bottom:30px;
+  }
+  
+  .names h1{
+    font-size:clamp(48px, 12vw, 90px);
+  }
+  
   .names h1:nth-child(2){
     margin-left:40px;
+  }
+  
+  .ampersand{
+    font-size:clamp(38px, 9vw, 70px);
+  }
+  
+  .tagline{
+    font-size:14px;
+    letter-spacing:.13em;
+    margin-top:40px;
+    padding:0 15px;
+    line-height:1.75;
+  }
+  
+  .scroll-indicator{
+    bottom:30px;
+  }
+  
+  .scroll-line{
+    height:50px;
+  }
+  
+  .details{
+    padding:80px 24px;
   }
   
   .detail-grid{
     grid-template-columns:1fr;
     gap:40px;
+    margin-top:60px;
+  }
+  
+  .detail-item{
+    padding:40px 0;
+  }
+  
+  .detail-item:last-child{
+    grid-column:1;
+    max-width:100%;
   }
   
   .detail-number{
-    font-size:48px;
+    font-size:52px;
+    top:30px;
+  }
+  
+  .detail-label{
+    font-size:10px;
+    letter-spacing:.32em;
+  }
+  
+  .detail-value{
+    font-size:clamp(26px, 5.5vw, 36px);
+    padding-right:70px;
+  }
+  
+  .detail-note{
+    font-size:14px;
+    padding-right:70px;
+  }
+  
+  .cta-section{
+    padding:120px 24px;
+  }
+  
+  .cta-title{
+    font-size:clamp(30px, 6.5vw, 44px);
+    margin-bottom:45px;
   }
   
   .btn-group{
     flex-direction:column;
-    align-items:stretch;
-    max-width:300px;
-    margin:0 auto;
+    gap:18px;
+    max-width:100%;
   }
   
+  .btn{
+    width:100%;
+    padding:18px 40px;
+    font-size:13px;
+    letter-spacing:.22em;
+  }
+  
+  footer{
+    padding:60px 24px 35px;
+  }
+  
+  .footer-date{
+    font-size:clamp(22px, 5vw, 32px);
+  }
+  
+  .footer-text{
+    font-size:12px;
+  }
+  
+  .geo-1{
+    width:280px;
+    height:280px;
+    top:-140px;
+    right:-140px;
+  }
+  
+  .geo-2{
+    width:220px;
+    height:220px;
+    bottom:-110px;
+    left:-110px;
+  }
+  
+  /* Hide custom cursor on mobile */
   html{
     cursor:auto;
   }
@@ -522,6 +734,580 @@ footer{
   .cursor,
   .cursor-dot{
     display:none;
+  }
+}
+
+/* Mobile Portrait (320px - 480px) */
+@media(max-width:480px){
+  .hero{
+    padding:35px 20px;
+  }
+  
+  .label-tag{
+    font-size:9px;
+    letter-spacing:.3em;
+    padding:9px 20px;
+    margin-bottom:25px;
+  }
+  
+  .names h1{
+    font-size:clamp(40px, 13vw, 70px);
+  }
+  
+  .names h1:nth-child(2){
+    margin-left:25px;
+  }
+  
+  .ampersand{
+    font-size:clamp(32px, 10vw, 55px);
+  }
+  
+  .tagline{
+    font-size:13px;
+    letter-spacing:.11em;
+    margin-top:35px;
+    padding:0 12px;
+    line-height:1.7;
+  }
+  
+  .scroll-indicator{
+    bottom:25px;
+  }
+  
+  .scroll-indicator span{
+    font-size:9px;
+  }
+  
+  .scroll-line{
+    height:45px;
+  }
+  
+  .details{
+    padding:70px 20px;
+  }
+  
+  .detail-grid{
+    gap:38px;
+    margin-top:55px;
+  }
+  
+  .detail-item{
+    padding:36px 0;
+  }
+  
+  .detail-number{
+    font-size:44px;
+    top:26px;
+  }
+  
+  .detail-label{
+    font-size:9px;
+    letter-spacing:.28em;
+    margin-bottom:14px;
+  }
+  
+  .detail-value{
+    font-size:clamp(22px, 6vw, 30px);
+    margin-bottom:12px;
+    padding-right:60px;
+  }
+  
+  .detail-note{
+    font-size:13px;
+    padding-right:60px;
+    line-height:1.65;
+  }
+  
+  .cta-section{
+    padding:100px 20px;
+  }
+  
+  .cta-section::before{
+    width:500px;
+    height:500px;
+  }
+  
+  .cta-title{
+    font-size:clamp(26px, 7vw, 38px);
+    margin-bottom:40px;
+    line-height:1.25;
+  }
+  
+  .btn{
+    padding:16px 36px;
+    font-size:12px;
+    letter-spacing:.2em;
+  }
+  
+  footer{
+    padding:55px 20px 30px;
+  }
+  
+  .footer-date{
+    font-size:clamp(20px, 6vw, 28px);
+    margin-bottom:22px;
+  }
+  
+  .footer-text{
+    font-size:11px;
+    letter-spacing:.26em;
+  }
+  
+  .footer-heart{
+    font-size:18px;
+    margin:22px 0;
+  }
+  
+  .geo-1{
+    width:220px;
+    height:220px;
+    top:-110px;
+    right:-110px;
+  }
+  
+  .geo-2{
+    width:180px;
+    height:180px;
+    bottom:-90px;
+    left:-90px;
+  }
+}
+
+/* Small Mobile (320px - 374px) */
+@media(max-width:374px){
+  .hero{
+    padding:30px 16px;
+  }
+  
+  .label-tag{
+    font-size:8px;
+    letter-spacing:.28em;
+    padding:8px 18px;
+  }
+  
+  .names h1{
+    font-size:clamp(35px, 14vw, 60px);
+  }
+  
+  .names h1:nth-child(2){
+    margin-left:20px;
+  }
+  
+  .ampersand{
+    font-size:clamp(28px, 11vw, 48px);
+  }
+  
+  .tagline{
+    font-size:12px;
+    letter-spacing:.1em;
+    margin-top:30px;
+    padding:0 10px;
+  }
+  
+  .scroll-indicator{
+    bottom:20px;
+  }
+  
+  .scroll-indicator span{
+    font-size:8px;
+  }
+  
+  .scroll-line{
+    height:40px;
+  }
+  
+  .details{
+    padding:60px 16px;
+  }
+  
+  .detail-grid{
+    gap:35px;
+    margin-top:50px;
+  }
+  
+  .detail-item{
+    padding:32px 0;
+  }
+  
+  .detail-number{
+    font-size:38px;
+    top:24px;
+    right:-5px;
+  }
+  
+  .detail-label{
+    font-size:8px;
+    letter-spacing:.26em;
+    margin-bottom:12px;
+  }
+  
+  .detail-value{
+    font-size:clamp(20px, 7vw, 26px);
+    margin-bottom:11px;
+    padding-right:55px;
+  }
+  
+  .detail-note{
+    font-size:12px;
+    padding-right:55px;
+    line-height:1.6;
+  }
+  
+  .cta-section{
+    padding:90px 16px;
+  }
+  
+  .cta-title{
+    font-size:clamp(24px, 8vw, 34px);
+    margin-bottom:36px;
+  }
+  
+  .btn{
+    padding:15px 32px;
+    font-size:11px;
+    letter-spacing:.18em;
+  }
+  
+  footer{
+    padding:50px 16px 28px;
+  }
+  
+  .footer-date{
+    font-size:clamp(18px, 7vw, 24px);
+    margin-bottom:20px;
+  }
+  
+  .footer-text{
+    font-size:10px;
+    letter-spacing:.24em;
+  }
+  
+  .footer-heart{
+    font-size:16px;
+    margin:20px 0;
+  }
+  
+  .geo-1{
+    width:190px;
+    height:190px;
+    top:-95px;
+    right:-95px;
+  }
+  
+  .geo-2{
+    width:160px;
+    height:160px;
+    bottom:-80px;
+    left:-80px;
+  }
+  
+  .loading-text{
+    font-size:38px;
+  }
+}
+
+/* Extra Large Screens (1920px+) */
+@media(min-width:1920px){
+  .hero{
+    padding:80px 60px;
+  }
+  
+  .details{
+    padding:160px 80px;
+    max-width:1800px;
+  }
+  
+  .detail-grid{
+    gap:80px;
+    margin-top:100px;
+  }
+  
+  .cta-section{
+    padding:200px 80px;
+  }
+}
+
+/* Ultra Wide Screens (2560px+) */
+@media(min-width:2560px){
+  .hero{
+    padding:120px 100px;
+  }
+  
+  .names h1{
+    font-size:clamp(120px, 12vw, 220px);
+  }
+  
+  .details{
+    padding:220px 100px;
+    max-width:2400px;
+  }
+  
+  .detail-grid{
+    gap:100px;
+    margin-top:140px;
+  }
+  
+  .detail-value{
+    font-size:clamp(40px, 3.5vw, 52px);
+  }
+  
+  .cta-section{
+    padding:260px 100px;
+  }
+  
+  .cta-title{
+    font-size:clamp(52px, 4.5vw, 80px);
+  }
+}
+
+/* Safe Area Insets for devices with notch (iPhone X+) */
+@supports(padding:max(0px)){
+  .hero{
+    padding-left:max(40px, env(safe-area-inset-left));
+    padding-right:max(40px, env(safe-area-inset-right));
+    padding-top:max(40px, env(safe-area-inset-top));
+  }
+  
+  .details,
+  .cta-section{
+    padding-left:max(40px, env(safe-area-inset-left));
+    padding-right:max(40px, env(safe-area-inset-right));
+  }
+  
+  footer{
+    padding-left:max(40px, env(safe-area-inset-left));
+    padding-right:max(40px, env(safe-area-inset-right));
+    padding-bottom:max(30px, env(safe-area-inset-bottom));
+  }
+  
+  @media(max-width:480px){
+    .hero{
+      padding-left:max(20px, env(safe-area-inset-left));
+      padding-right:max(20px, env(safe-area-inset-right));
+      padding-top:max(35px, env(safe-area-inset-top));
+    }
+    
+    .details,
+    .cta-section{
+      padding-left:max(20px, env(safe-area-inset-left));
+      padding-right:max(20px, env(safe-area-inset-right));
+    }
+    
+    footer{
+      padding-left:max(20px, env(safe-area-inset-left));
+      padding-right:max(20px, env(safe-area-inset-right));
+      padding-bottom:max(30px, env(safe-area-inset-bottom));
+    }
+  }
+  
+  @media(max-width:374px){
+    .hero{
+      padding-left:max(16px, env(safe-area-inset-left));
+      padding-right:max(16px, env(safe-area-inset-right));
+      padding-top:max(30px, env(safe-area-inset-top));
+    }
+    
+    .details,
+    .cta-section{
+      padding-left:max(16px, env(safe-area-inset-left));
+      padding-right:max(16px, env(safe-area-inset-right));
+    }
+    
+    footer{
+      padding-left:max(16px, env(safe-area-inset-left));
+      padding-right:max(16px, env(safe-area-inset-right));
+      padding-bottom:max(28px, env(safe-area-inset-bottom));
+    }
+  }
+}
+
+/* Landscape Mode for Mobile Devices */
+@media(max-height:500px) and (orientation:landscape){
+  .hero{
+    min-height:auto;
+    padding:30px 20px;
+  }
+  
+  .names h1{
+    font-size:clamp(35px, 10vw, 60px);
+  }
+  
+  .names h1:nth-child(2){
+    margin-left:30px;
+  }
+  
+  .ampersand{
+    font-size:clamp(28px, 8vw, 45px);
+  }
+  
+  .tagline{
+    margin-top:25px;
+    font-size:12px;
+  }
+  
+  .scroll-indicator{
+    display:none;
+  }
+  
+  .details{
+    padding:60px 20px;
+  }
+  
+  .detail-grid{
+    grid-template-columns:repeat(3, 1fr);
+    gap:30px;
+    margin-top:40px;
+  }
+  
+  .detail-item{
+    padding:30px 0;
+  }
+  
+  .detail-number{
+    font-size:36px;
+    top:22px;
+  }
+  
+  .detail-value{
+    font-size:clamp(18px, 4vw, 24px);
+  }
+  
+  .detail-note{
+    font-size:11px;
+  }
+  
+  .cta-section{
+    padding:80px 20px;
+  }
+  
+  .cta-title{
+    font-size:clamp(24px, 5vw, 36px);
+    margin-bottom:35px;
+  }
+  
+  .btn-group{
+    flex-direction:row;
+    justify-content:center;
+    gap:15px;
+  }
+  
+  .btn{
+    width:auto;
+    padding:14px 32px;
+    font-size:11px;
+  }
+  
+  footer{
+    padding:40px 20px 25px;
+  }
+}
+
+/* Accessibility Improvements */
+
+/* Reduce motion for users with motion sensitivity */
+@media(prefers-reduced-motion:reduce){
+  *,
+  *::before,
+  *::after{
+    animation-duration:0.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:0.01ms !important;
+    scroll-behavior:auto !important;
+  }
+  
+  html{
+    scroll-behavior:auto;
+  }
+  
+  .names h1{
+    opacity:1;
+    transform:translateY(0);
+  }
+  
+  .label-tag,
+  .tagline,
+  .ampersand,
+  .scroll-indicator{
+    opacity:1;
+    animation:none;
+  }
+  
+  .detail-item{
+    opacity:1;
+    transform:translateY(0);
+  }
+  
+  #particles{
+    display:none;
+  }
+  
+  .geo-circle{
+    animation:none;
+  }
+}
+
+/* High Contrast Mode for better readability */
+@media(prefers-contrast:high){
+  .detail-number{
+    color:var(--gray-500);
+  }
+  
+  .label-tag{
+    border-width:2px;
+  }
+  
+  .btn{
+    border-width:2px;
+  }
+  
+  .geo-circle{
+    border-width:2px;
+    opacity:.8;
+  }
+  
+  .divider-line{
+    background:var(--gray-600);
+  }
+}
+
+/* Dark Mode Support (if needed) */
+@media(prefers-color-scheme:light){
+  /* Currently designed for dark, but ready for future light mode */
+}
+
+/* Print Styles */
+@media print{
+  *,
+  *::before,
+  *::after{
+    animation:none !important;
+    transition:none !important;
+  }
+  
+  body{
+    background:white;
+    color:black;
+  }
+  
+  .cursor,
+  .cursor-dot,
+  #particles,
+  .loading,
+  .geo-circle,
+  .scroll-indicator{
+    display:none !important;
+  }
+  
+  .hero,
+  .details,
+  .cta-section,
+  footer{
+    page-break-inside:avoid;
+  }
+  
+  .btn{
+    border:2px solid black;
+    color:black;
   }
 }
 
