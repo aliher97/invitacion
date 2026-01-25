@@ -326,6 +326,50 @@ body{
   color:var(--gray-600);
 }
 
+/* Gift Icon Styles */
+.gift-icon{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:var(--gray-700);
+  position:absolute;
+  right:0;
+  top:32px;
+  transition:color .3s ease, transform .3s ease;
+}
+
+.gift-icon svg{
+  width:56px;
+  height:56px;
+  stroke-width:.8;
+}
+
+.detail-item:hover .gift-icon{
+  color:var(--gray-600);
+  transform:rotate(-5deg) scale(1.05);
+}
+
+/* Gift Item Specific Styles */
+.gift-item{
+  text-align:left;
+}
+
+.gift-item .detail-note{
+  max-width:100%;
+  margin:20px 0 0 0;
+  padding-right:80px;
+}
+
+.gift-item .btn-group{
+  margin-top:32px;
+  display:flex;
+  justify-content:flex-start;
+}
+
+.gift-item .btn{
+  min-width:240px;
+}
+
 .detail-label{
   font-size:11px;
   letter-spacing:.35em;
@@ -441,6 +485,65 @@ body{
 
 .btn.secondary:hover span{
   color:var(--white);
+}
+
+/* Gift Card */
+.gift-card{
+  max-width:400px;
+  margin:0 auto 32px;
+  padding:40px 32px;
+  border:1px solid var(--gray-800);
+  background:rgba(255,255,255,.02);
+  border-radius:2px;
+  transition:all .4s ease;
+  position:relative;
+  overflow:hidden;
+}
+
+.gift-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:1px;
+  background:linear-gradient(to right, transparent, var(--gray-700), transparent);
+  opacity:0;
+  transition:opacity .4s ease;
+}
+
+.gift-card:hover{
+  border-color:var(--gray-700);
+  background:rgba(255,255,255,.04);
+  transform:translateY(-2px);
+}
+
+.gift-card:hover::before{
+  opacity:1;
+}
+
+.gift-card .detail-label{
+  margin-bottom:16px;
+  text-align:center;
+  opacity:.7;
+  font-size:10px;
+  letter-spacing:.4em;
+}
+
+.gift-card .detail-value{
+  text-align:center;
+  font-size:36px;
+  letter-spacing:.05em;
+  margin-bottom:28px;
+  color:var(--white);
+  font-weight:300;
+}
+
+.gift-card .btn{
+  width:100%;
+  display:block;
+  text-align:center;
+  margin:0;
 }
 
 /* Footer */
@@ -574,6 +677,23 @@ footer{
     font-size:60px;
   }
   
+  /* Gift Section Responsive */
+  .gift-icon svg{
+    width:52px;
+    height:52px;
+  }
+  
+  .gift-item{
+    grid-column:span 2;
+    max-width:700px;
+    margin:0 auto;
+  }
+  
+  .gift-item .detail-note{
+    max-width:100%;
+    padding-right:75px;
+  }
+  
   .cta-title{
     font-size:clamp(34px, 5.5vw, 50px);
     margin-bottom:50px;
@@ -607,6 +727,11 @@ footer{
     margin-bottom:30px;
   }
   
+  .names{
+    max-width:100%;
+    margin:0 auto;
+  }
+  
   .names h1{
     font-size:clamp(48px, 12vw, 90px);
   }
@@ -637,16 +762,22 @@ footer{
   
   .details{
     padding:80px 24px;
+    max-width:100%;
+    margin:0 auto;
   }
   
   .detail-grid{
     grid-template-columns:1fr;
     gap:40px;
     margin-top:60px;
+    max-width:500px;
+    margin-left:auto;
+    margin-right:auto;
   }
   
   .detail-item{
-    padding:40px 0;
+    padding:40px 20px;
+    margin:0 auto;
   }
   
   .detail-item:last-child{
@@ -674,6 +805,27 @@ footer{
     padding-right:70px;
   }
   
+  /* Gift Section Responsive */
+  .gift-icon svg{
+    width:48px;
+    height:48px;
+  }
+  
+  .gift-item .detail-note{
+    padding-right:60px;
+  }
+  
+  .gift-item .btn-group{
+    justify-content:center;
+    margin-top:28px;
+  }
+  
+  .gift-item .btn{
+    width:100%;
+    min-width:auto;
+    max-width:100%;
+  }
+  
   .cta-section{
     padding:120px 24px;
   }
@@ -686,7 +838,8 @@ footer{
   .btn-group{
     flex-direction:column;
     gap:18px;
-    max-width:100%;
+    max-width:400px;
+    margin:0 auto;
   }
   
   .btn{
@@ -694,6 +847,17 @@ footer{
     padding:18px 40px;
     font-size:13px;
     letter-spacing:.22em;
+  }
+  
+  .gift-card{
+    max-width:90%;
+    padding:36px 24px;
+    margin:0 auto 28px;
+  }
+  
+  .gift-card .detail-value{
+    font-size:32px;
+    margin-bottom:24px;
   }
   
   footer{
@@ -750,6 +914,11 @@ footer{
     margin-bottom:25px;
   }
   
+  .names{
+    max-width:100%;
+    margin:0 auto;
+  }
+  
   .names h1{
     font-size:clamp(40px, 13vw, 70px);
   }
@@ -784,15 +953,21 @@ footer{
   
   .details{
     padding:70px 20px;
+    max-width:100%;
+    margin:0 auto;
   }
   
   .detail-grid{
     gap:38px;
     margin-top:55px;
+    max-width:450px;
+    margin-left:auto;
+    margin-right:auto;
   }
   
   .detail-item{
-    padding:36px 0;
+    padding:36px 15px;
+    margin:0 auto;
   }
   
   .detail-number{
@@ -818,6 +993,24 @@ footer{
     line-height:1.65;
   }
   
+  /* Gift Section Responsive */
+  .gift-icon{
+    top:28px;
+  }
+  
+  .gift-icon svg{
+    width:42px;
+    height:42px;
+  }
+  
+  .gift-item .detail-note{
+    padding-right:55px;
+  }
+  
+  .gift-item .btn-group{
+    margin-top:24px;
+  }
+  
   .cta-section{
     padding:100px 20px;
   }
@@ -833,10 +1026,34 @@ footer{
     line-height:1.25;
   }
   
+  .btn-group{
+    flex-direction:column;
+    gap:16px;
+    max-width:360px;
+    margin:0 auto;
+  }
+  
   .btn{
+    width:100%;
     padding:16px 36px;
     font-size:12px;
     letter-spacing:.2em;
+  }
+  
+  .gift-card{
+    max-width:95%;
+    padding:32px 20px;
+    margin:0 auto 24px;
+  }
+  
+  .gift-card .detail-label{
+    font-size:9px;
+    letter-spacing:.35em;
+  }
+  
+  .gift-card .detail-value{
+    font-size:28px;
+    margin-bottom:22px;
   }
   
   footer{
@@ -885,6 +1102,11 @@ footer{
     padding:8px 18px;
   }
   
+  .names{
+    max-width:100%;
+    margin:0 auto;
+  }
+  
   .names h1{
     font-size:clamp(35px, 14vw, 60px);
   }
@@ -918,15 +1140,21 @@ footer{
   
   .details{
     padding:60px 16px;
+    max-width:100%;
+    margin:0 auto;
   }
   
   .detail-grid{
     gap:35px;
     margin-top:50px;
+    max-width:400px;
+    margin-left:auto;
+    margin-right:auto;
   }
   
   .detail-item{
-    padding:32px 0;
+    padding:32px 12px;
+    margin:0 auto;
   }
   
   .detail-number{
@@ -953,6 +1181,31 @@ footer{
     line-height:1.6;
   }
   
+  /* Gift Section Responsive */
+  .gift-icon{
+    top:24px;
+    right:-5px;
+  }
+  
+  .gift-icon svg{
+    width:36px;
+    height:36px;
+  }
+  
+  .gift-item .detail-note{
+    padding-right:50px;
+    font-size:11px;
+  }
+  
+  .gift-item .btn-group{
+    margin-top:20px;
+  }
+  
+  .gift-item .btn{
+    padding:15px 24px;
+    font-size:11px;
+  }
+  
   .cta-section{
     padding:90px 16px;
   }
@@ -962,10 +1215,35 @@ footer{
     margin-bottom:36px;
   }
   
+  .btn-group{
+    flex-direction:column;
+    gap:14px;
+    max-width:340px;
+    margin:0 auto;
+  }
+  
   .btn{
+    width:100%;
     padding:15px 32px;
     font-size:11px;
     letter-spacing:.18em;
+  }
+  
+  .gift-card{
+    max-width:98%;
+    padding:28px 16px;
+    margin:0 auto 20px;
+  }
+  
+  .gift-card .detail-label{
+    font-size:8px;
+    letter-spacing:.32em;
+    margin-bottom:14px;
+  }
+  
+  .gift-card .detail-value{
+    font-size:24px;
+    margin-bottom:20px;
   }
   
   footer{
@@ -1128,6 +1406,11 @@ footer{
     padding:30px 20px;
   }
   
+  .names{
+    max-width:100%;
+    margin:0 auto;
+  }
+  
   .names h1{
     font-size:clamp(35px, 10vw, 60px);
   }
@@ -1151,16 +1434,21 @@ footer{
   
   .details{
     padding:60px 20px;
+    max-width:100%;
+    margin:0 auto;
   }
   
   .detail-grid{
     grid-template-columns:repeat(3, 1fr);
     gap:30px;
     margin-top:40px;
+    max-width:900px;
+    margin-left:auto;
+    margin-right:auto;
   }
   
   .detail-item{
-    padding:30px 0;
+    padding:30px 10px;
   }
   
   .detail-number{
@@ -1176,6 +1464,47 @@ footer{
     font-size:11px;
   }
   
+  /* Gift Section Landscape */
+  .gift-item{
+    grid-column:span 3;
+    max-width:700px;
+    margin:0 auto;
+    padding:30px 20px;
+  }
+  
+  .gift-icon{
+    top:22px;
+  }
+  
+  .gift-icon svg{
+    width:40px;
+    height:40px;
+  }
+  
+  .gift-item .detail-label{
+    font-size:9px;
+  }
+  
+  .gift-item .detail-value{
+    font-size:22px;
+  }
+  
+  .gift-item .detail-note{
+    font-size:11px;
+    padding-right:50px;
+  }
+  
+  .gift-item .btn-group{
+    flex-direction:row;
+    justify-content:flex-start;
+    margin-top:25px;
+  }
+  
+  .gift-item .btn{
+    width:auto;
+    min-width:200px;
+  }
+  
   .cta-section{
     padding:80px 20px;
   }
@@ -1189,6 +1518,8 @@ footer{
     flex-direction:row;
     justify-content:center;
     gap:15px;
+    max-width:600px;
+    margin:0 auto;
   }
   
   .btn{
@@ -1435,27 +1766,44 @@ footer{
       </a>
     </div>
   </section>
-   <!-- Divider -->
-   <div class="divider-line"></div>
+
+  <!-- Divider -->
+  <div class="divider-line"></div>
 
   <!-- Gifts Section -->
-<section class="cta-section">
-  <h2 class="cta-title">Mesa de Regalos</h2>
-  <p class="detail-note" style="max-width:600px;margin:0 auto 48px;">
-    Si deseas acompañarnos con un detalle, hemos preparado una mesa de regalos.
-Para quienes prefieran obsequiar de otra forma, también hemos considerado, <i>Con cariño</i>, una alternativa en efectivo.
-  </p>
+  <section class="details gifts-section">
+    <div class="detail-grid" style="max-width:800px;margin:0 auto;">
+  
+      <div class="detail-item gift-item" data-index="gift">
+        <div class="detail-number gift-icon">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 12 20 22 4 22 4 12"></polyline>
+            <rect x="2" y="7" width="20" height="5"></rect>
+            <line x1="12" y1="22" x2="12" y2="7"></line>
+            <path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"></path>
+            <path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path>
+          </svg>
+        </div>
+        <div class="detail-label">NÚMERO DE EVENTO: 51932041</div>
+        <div class="detail-value">
+          Mesa de Regalos<br>
+          Liverpool
+        </div>
+        <p class="detail-note">
+          Si desean acompañarnos con un detalle, hemos preparado una mesa de regalos.<br>
+          Para quienes prefieran hacerlo de otra forma, también hemos considerado,<br>
+          <i>con cariño</i>, la opción de tarjetas de regalo Liverpool, así como transferencias o depósito en efectivo.
+        </p>
+        
+        <div class="btn-group" style="margin-top:32px;">
+          <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51932041" class="btn" target="_blank" rel="noopener noreferrer">
+            <span>Visitar Mesa Liverpool</span>
+          </a>
+        </div>
+      </div>
 
-  <div class="btn-group">
-    <a href="https://mesaderegalos.liverpool.com.mx/milistaderegalos/51932041" 
-       class="btn" target="_blank">
-      <span>Mesa Liverpool
-      <p class="detail-note" style="margin-top:16px;">
-        Número de evento: 51932041
-      </p></span>
-    </a>
-  </div>
-</section>
+    </div>  
+  </section>
 
   <!-- Footer -->
   <footer>
