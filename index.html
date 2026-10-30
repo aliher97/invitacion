@@ -276,6 +276,109 @@ body{
   background:linear-gradient(to bottom, var(--gray-600), transparent);
 }
 
+/* Countdown */
+.countdown{
+  display:flex;
+  justify-content:center;
+  margin-top:40px;
+  opacity:0;
+  animation:fadeIn 1s ease 1s forwards;
+}
+
+.count-cell{
+  min-width:clamp(64px, 12vw, 104px);
+  padding:0 clamp(8px, 2vw, 22px);
+  text-align:center;
+  border-left:1px solid var(--gray-800);
+}
+
+.count-cell:first-child{
+  border-left:0;
+}
+
+.count-num{
+  display:block;
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(36px, 5.5vw, 58px);
+  font-weight:300;
+  font-style:italic;
+  font-variant-numeric:lining-nums tabular-nums;
+  line-height:1;
+}
+
+.count-label{
+  display:block;
+  margin-top:12px;
+  font-size:10px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  color:var(--gray-500);
+}
+
+.count-done{
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(26px, 4vw, 38px);
+  font-weight:300;
+  font-style:italic;
+  color:var(--gray-300);
+}
+
+.hero-cta{
+  margin-top:36px;
+  margin-bottom:90px;
+  opacity:0;
+  animation:fadeIn 1s ease 1.2s forwards;
+}
+
+.hero-cta .btn{
+  width:auto;
+  min-width:240px;
+  padding:16px 40px;
+  font-size:12px;
+  letter-spacing:.22em;
+}
+
+.cta-note{
+  margin-top:48px;
+  line-height:1.9;
+}
+
+@media(max-width:480px){
+  .countdown{
+    margin-top:34px;
+  }
+
+  .count-label{
+    font-size:9px;
+    letter-spacing:.26em;
+  }
+
+  .hero-cta{
+    margin-top:32px;
+  }
+
+  .cta-note{
+    margin-top:40px;
+  }
+}
+
+@media(min-width:1024px){
+  .hero-cta{
+    margin-bottom:120px;
+  }
+}
+
+@media(max-height:500px) and (orientation:landscape){
+  .countdown{
+    margin-top:24px;
+  }
+
+  .hero-cta{
+    margin-top:24px;
+    margin-bottom:0;
+  }
+}
+
 /* Divider Line */
 .divider-line{
   height:1px;
@@ -656,6 +759,781 @@ footer{
   bottom:-150px;
   left:-150px;
   z-index:1;
+}
+
+/* Seating Section */
+.seating{
+  position:relative;
+}
+
+.seating svg text{
+  font-family:'Inter', system-ui, sans-serif;
+}
+
+.seating .rv{
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity .9s ease, transform .9s cubic-bezier(.215,.61,.355,1);
+}
+
+.seating .rv.in-view{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Scroll target: a pending translate would shift it after scrollIntoView */
+.seating .seating-detail.rv{
+  transform:none;
+}
+
+.seating-head{
+  text-align:center;
+  margin-bottom:72px;
+}
+
+.seating-head .cta-title{
+  margin-bottom:24px;
+}
+
+.seating-head .detail-note{
+  max-width:480px;
+  margin:0 auto;
+  padding-right:0;
+}
+
+.seating-head .detail-note i{
+  color:var(--gray-500);
+}
+
+/* Stats */
+.seating-stats{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  max-width:760px;
+  margin:0 auto 80px;
+}
+
+.seating-stat{
+  text-align:center;
+  padding:8px 16px;
+  border-left:1px solid var(--gray-800);
+}
+
+.seating-stat:first-child{
+  border-left:0;
+}
+
+.seating-stat-num{
+  display:block;
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(44px, 7vw, 84px);
+  font-weight:300;
+  font-style:italic;
+  line-height:1;
+  font-variant-numeric:lining-nums;
+}
+
+.seating-stat .detail-label{
+  margin:14px 0 0;
+}
+
+/* Search */
+.seating-search{
+  max-width:640px;
+  margin:0 auto 56px;
+  text-align:center;
+}
+
+.seating-search .detail-label{
+  margin-bottom:8px;
+}
+
+.seating-search input{
+  width:100%;
+  padding:12px 0;
+  border:0;
+  border-bottom:1px solid var(--gray-700);
+  border-radius:0;
+  background:transparent;
+  color:var(--white);
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(26px, 4vw, 40px);
+  font-weight:300;
+  font-style:italic;
+  text-align:center;
+  outline:none;
+  cursor:none;
+  transition:border-color .3s ease;
+}
+
+.seating-search input::placeholder{
+  color:var(--gray-600);
+}
+
+.seating-search input::-webkit-search-cancel-button{
+  display:none;
+}
+
+.seating-search input:focus{
+  border-color:var(--white);
+}
+
+.seating-results{
+  margin-top:8px;
+  text-align:left;
+}
+
+.seating-results button{
+  display:flex;
+  justify-content:space-between;
+  align-items:baseline;
+  gap:16px;
+  width:100%;
+  padding:16px 8px;
+  border:0;
+  border-bottom:1px solid var(--gray-800);
+  background:transparent;
+  color:var(--white);
+  text-align:left;
+  cursor:none;
+  transition:background .3s ease;
+}
+
+.seating-results button:hover,
+.seating-results button:focus-visible{
+  background:rgba(255,255,255,.04);
+  outline:none;
+}
+
+.res-name{
+  font-family:'Cormorant Garamond', serif;
+  font-size:24px;
+  line-height:1.2;
+}
+
+.res-main{
+  display:flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+  gap:6px 0;
+}
+
+.res-mesa{
+  flex-shrink:0;
+  font-size:10px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gray-500);
+}
+
+/* Badge: wedding party (Padrino / Dama) and the family table */
+.honor{
+  display:inline-block;
+  margin-left:12px;
+  padding:3px 8px 2px;
+  border:1px solid var(--gray-400);
+  font-family:'Inter', system-ui, sans-serif;
+  font-size:9px;
+  font-style:normal;
+  letter-spacing:.22em;
+  line-height:1.4;
+  text-transform:uppercase;
+  color:var(--white);
+  vertical-align:middle;
+}
+
+.seating-empty{
+  padding:20px 8px;
+  font-size:14px;
+  font-weight:300;
+  letter-spacing:.02em;
+  color:var(--gray-500);
+}
+
+/* Legend / Filters */
+.seating-legend{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  margin-bottom:48px;
+}
+
+.seat-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:12px 20px;
+  border:1px solid var(--gray-700);
+  background:transparent;
+  color:var(--gray-400);
+  font-family:'Inter', system-ui, sans-serif;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  cursor:none;
+  transition:all .3s ease;
+}
+
+.seat-chip svg{
+  width:16px;
+  height:16px;
+  color:var(--white);
+  transition:color .3s ease;
+}
+
+.seat-chip b{
+  font-weight:500;
+  color:var(--gray-600);
+  transition:color .3s ease;
+}
+
+.seat-chip:hover{
+  border-color:var(--gray-500);
+  color:var(--white);
+}
+
+.seat-chip.is-on{
+  background:var(--white);
+  border-color:var(--white);
+  color:var(--black);
+}
+
+.seat-chip.is-on svg,
+.seat-chip.is-on b{
+  color:var(--black);
+}
+
+/* Floor Plan */
+.seating-board{
+  display:grid;
+  grid-template-columns:minmax(0, 1.55fr) minmax(300px, 1fr);
+  gap:60px;
+  align-items:start;
+}
+
+.seating-map{
+  border:1px solid var(--gray-800);
+  background:rgba(255,255,255,.015);
+  padding:12px;
+}
+
+.seating-map svg{
+  display:block;
+  width:100%;
+  height:auto;
+}
+
+/* The plan shrinks a lot on phones: keep hairlines at their pixel weight */
+.seating-map svg *{
+  vector-effect:non-scaling-stroke;
+}
+
+.seating-key{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px 28px;
+  margin-top:20px;
+  list-style:none;
+}
+
+.seating-key li{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-size:10px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--gray-400);
+}
+
+.seating-key svg{
+  width:22px;
+  height:22px;
+}
+
+.seating-caption{
+  margin-top:16px;
+  font-size:11px;
+  font-weight:300;
+  letter-spacing:.12em;
+  line-height:1.7;
+  color:var(--gray-600);
+}
+
+/* Pista and Sonido are filled surfaces: the nested squares stack into a soft glow at the center */
+.floor-ring{
+  fill:rgba(255,255,255,.04);
+  stroke:var(--gray-600);
+  stroke-width:1;
+}
+
+.floor-ring.outer{
+  stroke:var(--gray-500);
+}
+
+.sound-box{
+  fill:rgba(255,255,255,.07);
+  stroke:var(--gray-400);
+  stroke-width:1;
+}
+
+.floor-label{
+  fill:var(--gray-300);
+  font-family:'Cormorant Garamond', serif !important;
+  font-style:italic;
+  font-weight:300;
+  text-anchor:middle;
+}
+
+.floor-sub{
+  fill:var(--gray-400);
+  font-size:9px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  text-anchor:middle;
+}
+
+.head-table{
+  fill:rgba(255,255,255,.03);
+  stroke:var(--gray-500);
+  stroke-width:1;
+}
+
+.head-label{
+  fill:var(--white);
+  font-family:'Cormorant Garamond', serif !important;
+  font-style:italic;
+  font-weight:300;
+  text-anchor:middle;
+}
+
+.head-sub{
+  fill:var(--gray-400);
+  font-size:8px;
+  letter-spacing:.35em;
+  text-transform:uppercase;
+  text-anchor:middle;
+}
+
+.tbl{
+  outline:none;
+  cursor:none;
+}
+
+.tbl-hit{
+  fill:transparent;
+}
+
+.tbl-disc{
+  fill:rgba(255,255,255,.03);
+  stroke:var(--gray-600);
+  stroke-width:1;
+  transition:fill .4s ease, stroke .4s ease;
+}
+
+.tbl-ring{
+  fill:none;
+  stroke:var(--gray-500);
+  stroke-width:1;
+  stroke-dasharray:2 7;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+  transition:opacity .4s ease;
+}
+
+.tbl-num{
+  fill:var(--white);
+  font-family:'Cormorant Garamond', serif !important;
+  font-weight:300;
+  font-style:italic;
+  font-variant-numeric:lining-nums;
+  text-anchor:middle;
+}
+
+.tbl-count{
+  fill:var(--gray-500);
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  text-anchor:middle;
+}
+
+.tbl:hover .tbl-disc,
+.tbl:focus-visible .tbl-disc{
+  fill:rgba(255,255,255,.07);
+  stroke:var(--white);
+}
+
+.tbl:hover .tbl-ring,
+.tbl:focus-visible .tbl-ring{
+  opacity:.6;
+}
+
+.tbl.is-active .tbl-disc{
+  fill:rgba(255,255,255,.1);
+  stroke:var(--white);
+  stroke-width:1.5;
+}
+
+.tbl.is-active .tbl-ring{
+  opacity:1;
+  animation:ringSpin 40s linear infinite;
+}
+
+/* The couple's closest family: inverted disc, whatever the state */
+.tbl.is-main .tbl-disc,
+.tbl.is-main:hover .tbl-disc,
+.tbl.is-main:focus-visible .tbl-disc,
+.tbl.is-main.is-active .tbl-disc{
+  fill:var(--white);
+  stroke:var(--white);
+}
+
+.tbl.is-main .tbl-num{
+  fill:var(--black);
+}
+
+@keyframes ringSpin{
+  to{ transform:rotate(360deg); }
+}
+
+/* Seat Glyphs */
+.gl.solid{
+  fill:currentColor;
+  stroke:none;
+}
+
+.gl.am{
+  opacity:.72;
+}
+
+.gl.empty{
+  fill:none;
+  stroke:var(--gray-600);
+  stroke-width:1;
+  stroke-dasharray:2 2.5;
+}
+
+/* Halo around the seat of a Padrino / Dama */
+.seat-halo,
+.gl-halo{
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1;
+}
+
+.seating svg{
+  color:var(--white);
+}
+
+.seat{
+  cursor:none;
+}
+
+.seat-hit{
+  fill:transparent;
+}
+
+.seat-in{
+  transform-box:fill-box;
+  transform-origin:center;
+  transition:transform .35s cubic-bezier(.215,.61,.355,1);
+}
+
+.seat:hover .seat-in,
+.seat.is-peek .seat-in,
+.seat.is-hit .seat-in{
+  transform:scale(1.5);
+}
+
+.seat-ping{
+  fill:none;
+  stroke:var(--white);
+  stroke-width:1;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+}
+
+.seat.is-hit .seat-ping,
+.seat.is-peek .seat-ping{
+  animation:seatPing 1.8s ease-out infinite;
+}
+
+@keyframes seatPing{
+  0%{ opacity:.9; transform:scale(1); }
+  100%{ opacity:0; transform:scale(3); }
+}
+
+/* Entrance (backwards fill keeps hover and filter states working afterwards) */
+.rv:not(.in-view) .tbl,
+.rv:not(.in-view) .seat{
+  opacity:0;
+}
+
+.rv.in-view .tbl{
+  animation:seatFade .9s ease calc(var(--i) * 90ms) backwards;
+}
+
+.rv.in-view .seat{
+  animation:seatFade .6s ease var(--d) backwards;
+}
+
+@keyframes seatFade{
+  from{ opacity:0; }
+}
+
+/* Filter by group */
+.seating [data-g]{
+  transition:opacity .4s ease;
+}
+
+.seating[data-filter] [data-g]{
+  opacity:.14;
+}
+
+.seating[data-filter] .seat-row{
+  opacity:.3;
+}
+
+.seating[data-filter="fa"] [data-g="fa"],
+.seating[data-filter="am"] [data-g="am"]{
+  opacity:1;
+}
+
+/* Tooltip */
+.seating-tip{
+  position:absolute;
+  z-index:5;
+  padding:12px 18px;
+  border:1px solid var(--gray-600);
+  background:var(--black);
+  white-space:nowrap;
+  pointer-events:none;
+  opacity:0;
+  transform:translate(-50%, calc(-100% - 16px));
+  transition:opacity .2s ease;
+}
+
+.seating-tip.on{
+  opacity:1;
+}
+
+.seating-tip strong{
+  display:block;
+  font-family:'Cormorant Garamond', serif;
+  font-size:20px;
+  font-weight:400;
+  line-height:1.2;
+}
+
+.seating-tip span{
+  display:block;
+  margin-top:4px;
+  font-size:9px;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+  color:var(--gray-400);
+}
+
+/* Table Detail */
+.seat-detail-head{
+  display:flex;
+  align-items:baseline;
+  flex-wrap:wrap;
+  gap:8px 24px;
+  margin-bottom:28px;
+}
+
+.seat-detail-num{
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(72px, 9vw, 120px);
+  font-weight:300;
+  font-style:italic;
+  font-variant-numeric:lining-nums;
+  line-height:.9;
+  letter-spacing:-.02em;
+}
+
+.seat-detail-meta{
+  font-size:11px;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gray-500);
+  line-height:1.9;
+}
+
+.seat-back{
+  display:none;
+  margin-bottom:28px;
+}
+
+.seat-list{
+  list-style:none;
+  border-top:1px solid var(--gray-800);
+}
+
+.seat-row{
+  display:grid;
+  grid-template-columns:28px 1fr;
+  column-gap:14px;
+  align-items:center;
+  padding:14px 12px;
+  border-bottom:1px solid var(--gray-800);
+  hyphens:manual;
+  cursor:none;
+  animation:rowIn .6s cubic-bezier(.215,.61,.355,1) calc(var(--r) * 45ms) backwards;
+}
+
+.seat-row svg{
+  grid-row:span 2;
+  width:24px;
+  height:24px;
+}
+
+.seat-row-name{
+  font-family:'Cormorant Garamond', serif;
+  font-size:22px;
+  line-height:1.2;
+}
+
+.seat-row-name em{
+  margin-left:10px;
+  font-size:15px;
+  color:var(--gray-500);
+}
+
+.seat-row-rel{
+  margin-top:4px;
+  font-size:10px;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+  color:var(--gray-500);
+}
+
+.seat-row.is-hit,
+.seat-row:hover{
+  background:linear-gradient(to right, rgba(255,255,255,.07), transparent);
+  box-shadow:inset 2px 0 0 var(--white);
+}
+
+@keyframes rowIn{
+  from{ opacity:0; transform:translateX(-12px); }
+}
+
+@media(max-width:1023px){
+  .seating-board{
+    grid-template-columns:1fr;
+    gap:48px;
+  }
+
+  .seat-back{
+    display:inline-flex;
+  }
+}
+
+@media(max-width:767px){
+  .seating-head{
+    margin-bottom:56px;
+  }
+
+  .seating-stats{
+    margin-bottom:60px;
+  }
+
+  .seating-stat{
+    padding:8px 6px;
+  }
+
+  .seating-stat .detail-label{
+    font-size:8px;
+    letter-spacing:.24em;
+  }
+
+  .seating-search{
+    margin-bottom:44px;
+  }
+
+  .res-name{
+    font-size:21px;
+  }
+
+  .seating-legend{
+    gap:8px;
+    margin-bottom:36px;
+  }
+
+  .seat-chip{
+    padding:10px 14px;
+    font-size:9px;
+    letter-spacing:.2em;
+  }
+
+  .seating-board{
+    gap:40px;
+  }
+
+  .seating-map{
+    padding:6px;
+  }
+
+  .seat-detail-meta{
+    font-size:10px;
+    letter-spacing:.24em;
+  }
+
+  .seat-row{
+    padding:12px 8px;
+  }
+
+  .seat-row-name{
+    font-size:20px;
+  }
+
+  .seat-row-rel{
+    font-size:9px;
+    letter-spacing:.2em;
+  }
+
+  .seating-tip{
+    padding:10px 14px;
+  }
+
+  .seating-tip strong{
+    font-size:18px;
+  }
+}
+
+@media(max-width:374px){
+  .seating-stat-num{
+    font-size:38px;
+  }
+
+  .seat-chip{
+    padding:9px 12px;
+  }
+
+  .res-name{
+    font-size:19px;
+  }
+
+  .seat-row-name{
+    font-size:18px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .seating .rv{
+    opacity:1;
+    transform:none;
+  }
+
+  .rv:not(.in-view) .tbl,
+  .rv:not(.in-view) .seat{
+    opacity:1;
+  }
 }
 
 /* ========== RESPONSIVE DESIGN ========== */
@@ -1839,7 +2717,32 @@ footer{
     <p class="tagline">
       Unidos en amor, celebramos el comienzo de nuestra historia
     </p>
-    
+
+    <div class="countdown" id="countdown" role="timer" aria-label="Cuenta regresiva para el 21 de noviembre de 2026">
+      <div class="count-cell">
+        <span class="count-num" data-unit="days">00</span>
+        <span class="count-label" data-unit="days-label">Días</span>
+      </div>
+      <div class="count-cell">
+        <span class="count-num" data-unit="hours">00</span>
+        <span class="count-label">Horas</span>
+      </div>
+      <div class="count-cell">
+        <span class="count-num" data-unit="mins">00</span>
+        <span class="count-label">Min</span>
+      </div>
+      <div class="count-cell">
+        <span class="count-num" data-unit="secs">00</span>
+        <span class="count-label">Seg</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#mesas" class="btn">
+        <span>Encuentra tu mesa</span>
+      </a>
+    </div>
+
     <div class="scroll-indicator">
       <span>Scroll</span>
       <div class="scroll-line"></div>
@@ -1889,13 +2792,14 @@ footer{
   <section class="cta-section">
     <h2 class="cta-title">Tu presencia es nuestro mejor regalo</h2>
     <div class="btn-group">
-      <a href="https://forms.gle/j73boVpKi5iYnxnL9" class="btn" target="_blank">
-        <span>Confirmar Asistencia</span>
+      <a href="#mesas" class="btn">
+        <span>Encuentra tu mesa</span>
       </a>
       <a href="https://maps.app.goo.gl/jatSZJWMptrEkDEu7" target="_blank" class="btn secondary">
         <span>Ver Ubicación</span>
       </a>
     </div>
+    <p class="footer-text cta-note">La lista de asistencia ya está cerrada<br>Gracias por confirmar</p>
   </section>
 
   <!-- Divider -->
@@ -1933,7 +2837,47 @@ footer{
         </div>
       </div>
 
-    </div>  
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider-line"></div>
+
+  <!-- Seating Section -->
+  <section class="details seating" id="mesas">
+    <header class="seating-head rv">
+      <div class="label-tag">
+        <span>Distribución de Mesas</span>
+      </div>
+      <h2 class="cta-title">Encuentra tu lugar</h2>
+      <p class="detail-note">
+        Cada mesa reúne a quienes más queremos.<br>
+        <i>Versión preliminar · la distribución puede cambiar</i>
+      </p>
+    </header>
+
+    <div class="seating-stats rv" id="seat-stats"></div>
+
+    <div class="seating-search rv">
+      <label class="detail-label" for="seat-q">Busca tu nombre</label>
+      <input id="seat-q" type="search" placeholder="Escribe tu nombre…" autocomplete="off" spellcheck="false" aria-controls="seat-results">
+      <div class="seating-results" id="seat-results" aria-live="polite"></div>
+    </div>
+
+    <div class="seating-legend rv" id="seat-legend" role="group" aria-label="Resaltar por grupo"></div>
+
+    <div class="seating-board" id="seat-board">
+      <div>
+        <div class="seating-map rv" id="seat-map"></div>
+        <ul class="seating-key" id="seat-key"></ul>
+        <p class="seating-caption">
+          Plano del salón. La ubicación de cada lugar dentro de la mesa es aproximada y puede cambiar.
+        </p>
+      </div>
+      <aside class="seating-detail rv" id="seat-detail" aria-live="polite"></aside>
+    </div>
+
+    <div class="seating-tip" id="seat-tip" role="tooltip"></div>
   </section>
 
   <!-- Footer -->
@@ -1945,6 +2889,127 @@ footer{
     </div>
   </footer>
 </div>
+
+<script>
+// Seating data (edit here when the plan changes)
+// Guest: [group, name, relation, companions, pending]
+// Groups: fa = Familia (both sides), am = Amigos (friends and work friends, both sides)
+// cap = TOTAL MESA from the sheet; seats without a guest render as free seats
+// title (optional) marks a table on the plan; "Padrino" / "Dama" in the relation mark the wedding party
+const SEATING_TABLES = [
+  { n: 1, cap: 9, title: 'Familia de los novios', guests: [
+    ['fa', 'Enedina Flores', 'Mamá'],
+    ['fa', 'Alejandro Montenegro', 'Padrastro'],
+    ['fa', 'Luis Flores', 'Tío / Padrino'],
+    ['fa', 'Ricardo Hernandez Tellez', 'Papá'],
+    ['fa', 'Leticia Martinez', 'Mamá'],
+    ['fa', 'Ricardo Hernandez Martinez', 'Hermano'],
+    ['fa', 'Francisco Javier Hernandez Martinez', 'Hermano / Padrino'],
+    ['fa', 'Yolanda Calderon Nava', 'Abuela / Dama'],
+    ['fa', 'Armando Hernandez Tellez', 'Tío']
+  ]},
+  { n: 2, cap: 9, guests: [
+    ['fa', 'Yolanda Martinez Calderon', 'Tía'],
+    ['fa', 'Enrrique Guerrero', 'Tío'],
+    ['fa', 'David Enrrique Guerrero Martinez', 'Primo'],
+    ['fa', 'Emiliano Guerrero Martinez', 'Primo'],
+    ['fa', 'Carmen Martinez Calderon', 'Tía'],
+    ['fa', 'Diego Palma Martinez', 'Primo'],
+    ['fa', 'Maximiliano Palma Martinez', 'Primo'],
+    ['fa', 'Ricardo Palma', 'Tío'],
+    ['fa', 'Claudia Palma Martinez', 'Prima']
+  ]},
+  { n: 3, cap: 10, guests: [
+    ['fa', 'Senio Alicia', 'Tía'],
+    ['fa', 'Donaciano Flores', 'Tío'],
+    ['fa', 'Hilda Cruz', 'Tía'],
+    ['fa', 'Amayrani Flores', 'Prima'],
+    ['fa', 'Zul Ramirez', 'Prima'],
+    ['fa', 'Jordi Flores', 'Primo'],
+    ['fa', 'Beto Flores', 'Primo', ['Isabel Salgado']],
+    ['fa', 'Carlos Flores', 'Primo', ['Monica Alvarez']]
+  ]},
+  { n: 4, cap: 11, guests: [
+    ['fa', 'Tía Mary', 'Tía', ['Tim Nelson']],
+    ['fa', 'Miguel Flores', 'Tío'],
+    ['fa', 'Nancy Jacome', 'Tía'],
+    ['fa', 'Emiliano Flores', 'Primo'],
+    ['fa', 'Sofía Flores', 'Prima / Dama'],
+    ['fa', 'Raúl Roman', 'Tío'],
+    ['fa', 'Patricia Meneses', 'Conocida de la familia'],
+    ['fa', 'Mayra Roman', 'Prima', ['Jovita Martinez', 'Victoria / Barbara (niña)']]
+  ]},
+  { n: 5, cap: 10, guests: [
+    ['fa', 'Enriqueta Chacon', 'Tía'],
+    ['fa', 'Celso Flores', 'Tío'],
+    ['fa', 'Arnulfo Flores', 'Tío'],
+    ['fa', 'Judith Lopez', 'Tía'],
+    ['fa', 'Diego Flores', 'Primo'],
+    ['fa', 'Valeria Flores', 'Prima'],
+    ['fa', 'Victor Flores', 'Tío'],
+    ['fa', 'Adriana Gonzalez', 'Tía'],
+    ['fa', 'Andrés Flores', 'Primo'],
+    ['fa', 'Julieta Flores', 'Prima']
+  ]},
+  { n: 6, cap: 10, guests: [
+    ['am', 'Aline Albanil', '', ['Acompañante']],
+    ['am', 'Jonathan Navarro', ''],
+    ['am', 'Francisco Arredondo', '', ['Fany Villanueva']],
+    ['am', 'Francisca Tapia', '', ['Isidro Cuervo Escobedo de Tapia']],
+    ['am', 'Victor Jimenez', '', ['San Juana Aurora Ramirez de Jimenez']],
+    ['am', 'Mariana (Colombia)', '']
+  ]},
+  { n: 7, cap: 9, guests: [
+    ['am', 'Holbeing Cisneros', ''],
+    ['am', 'Xochitl Corona', ''],
+    ['am', 'Ernesto Balandran', '', ['Esposa'], 1],
+    ['am', 'Jael Barron', ''],
+    ['am', 'Arturo Guevara', '', ['Esposa']],
+    ['am', 'Karen Pacheco', '', ['Esposo']]
+  ]},
+  { n: 8, cap: 9, guests: [
+    ['am', 'Pablo Cid', ''],
+    ['am', 'Eduardo Rico', ''],
+    ['am', 'Karina Rico', ''],
+    ['am', 'Cesar Garcia', ''],
+    ['am', 'Mariana Jacobo', ''],
+    ['am', 'Litzy Aboytes', 'Dama'],
+    ['am', 'Mariana Hernandez', ''],
+    ['am', 'Enrrique Amate', ''],
+    ['am', 'Elizabeth Uribe', '']
+  ]},
+  { n: 9, cap: 10, guests: [
+    ['am', 'Daniel Bucio', 'Padrino'],
+    ['am', 'Diego Beltran', 'Padrino', ['Dani Beltran']],
+    ['am', 'Lesly Lopez', ''],
+    ['am', 'Carolina Paz', ''],
+    ['am', 'Gio Montenegro', ''],
+    ['am', 'Ana Bonilla', 'Dama'],
+    ['am', 'David Cariño', ''],
+    ['am', 'Enrrique Negrete', '', ['Acompañante']]
+  ]},
+  { n: 10, cap: 10, guests: [
+    ['am', 'Andy Becerril', ''],
+    ['am', 'Oscar Chimal', ''],
+    ['am', 'Karla Menchaca', ''],
+    ['am', 'Uriel Romo', '', ['Lucero Arzate']],
+    ['am', 'Ivan Trejo', ''],
+    ['am', 'Fernanda Nolasco', ''],
+    ['am', 'Enrique Mariscal', ''],
+    ['am', 'Fabian Rios', '', ['Liliana Rios'], 1]
+  ]},
+  { n: 11, cap: 10, guests: [
+    ['am', 'Vanesa Gallardo', '', ['Betochin (niño)']],
+    ['am', 'Humberto Lopez', ''],
+    ['am', 'Sofía Gonzalez', 'Dama'],
+    ['am', 'Humberto Ramírez', ''],
+    ['am', 'Rita Garduño', ''],
+    ['am', 'Erika', '', ['Brandon Resendiz']],
+    ['am', 'Zaira Jimenez', ''],
+    ['am', 'Armando Milan', '']
+  ]}
+];
+</script>
 
 <script>
 // Loading Screen
@@ -2144,6 +3209,408 @@ window.addEventListener('scroll', () => {
   
   lastScroll = currentScroll;
 });
+
+// Countdown (ceremony 17:00, Celaya time, so every guest sees the same moment)
+const weddingDate = new Date('2026-11-21T17:00:00-06:00');
+const countdown = document.getElementById('countdown');
+let countdownTimer;
+
+function updateCountdown() {
+  const diff = weddingDate - Date.now();
+
+  if (diff <= 0) {
+    const sinceStart = -diff;
+    const message = sinceStart < 12 * 3600 * 1000 ? 'Hoy celebramos' : 'Gracias por acompañarnos';
+    countdown.innerHTML = `<p class="count-done">${message}</p>`;
+    clearInterval(countdownTimer);
+    return;
+  }
+
+  const total = Math.floor(diff / 1000);
+  const days = Math.floor(total / 86400);
+  const values = {
+    days: String(days).padStart(2, '0'),
+    hours: String(Math.floor(total % 86400 / 3600)).padStart(2, '0'),
+    mins: String(Math.floor(total % 3600 / 60)).padStart(2, '0'),
+    secs: String(total % 60).padStart(2, '0')
+  };
+
+  Object.keys(values).forEach(unit => {
+    countdown.querySelector(`[data-unit="${unit}"]`).textContent = values[unit];
+  });
+  countdown.querySelector('[data-unit="days-label"]').textContent = days === 1 ? 'Día' : 'Días';
+}
+
+updateCountdown();
+countdownTimer = setInterval(updateCountdown, 1000);
+
+// Seating Chart
+(() => {
+  const GROUPS = [
+    { id: 'fa', label: 'Familia' },
+    { id: 'am', label: 'Amigos' }
+  ];
+  const GENERIC = { esposo: 'Esposo', esposa: 'Esposa', hermano: 'Hermano', bebe: 'Bebé', 'acompañante': 'Acompañante' };
+
+  // Venue floor plan (the couple's second sketch, 1 px of the sketch = 3.3 units): the same geometry
+  // on every screen. A table without a position here is not drawn, so add one when adding a table.
+  const PLAN = {
+    w: 1076, h: 1086,
+    pista: [370, 340, 426, 406],
+    novios: [43, 436, 185, 224],
+    sonido: [937, 376, 69, 370],
+    pos: { 5: [321, 119], 7: [599, 113], 6: [903, 113], 3: [226, 276], 4: [478, 258], 11: [776, 256], 1: [226, 840], 2: [489, 840], 10: [831, 840], 9: [360, 974], 8: [660, 974] }
+  };
+
+  // Table and label sizes: the plan shrinks to ~0.3x on phones, so they grow there
+  const SIZES = {
+    wide: { Rt: 40, Rs: 61, r: 7.6, num: 38, f: 1 },
+    narrow: { Rt: 40, Rs: 66, r: 12, num: 44, f: 1.6 }
+  };
+
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const narrow = matchMedia('(max-width:767px)');
+  const stacked = matchMedia('(max-width:1023px)');
+
+  const root = document.getElementById('mesas');
+  const el = {
+    stats: document.getElementById('seat-stats'),
+    legend: document.getElementById('seat-legend'),
+    board: document.getElementById('seat-board'),
+    map: document.getElementById('seat-map'),
+    key: document.getElementById('seat-key'),
+    detail: document.getElementById('seat-detail')
+  };
+  const tip = document.getElementById('seat-tip');
+  const input = document.getElementById('seat-q');
+  const results = document.getElementById('seat-results');
+
+  const state = { mesa: null, hit: null, filter: null };
+
+  const pad = n => String(n).padStart(2, '0');
+  const norm = s => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  const groupOf = id => GROUPS.find(g => g.id === id);
+  const firstName = name => /^(Tía|Tío) /.test(name) ? name : name.split(' ')[0];
+  const relOf = s => `${s.rel ? `${s.rel} · ` : ''}${groupOf(s.g).label}`;
+
+  // The wedding party is flagged in the relation column ("Tío / Padrino", "Dama"): it gets a badge
+  // and a halo, and the word leaves the relation line so it is not said twice
+  const honorOf = rel => /\bpadrino\b/i.test(rel) ? 'Padrino' : /\bdama\b/i.test(rel) ? 'Dama' : '';
+  const plainRel = rel => rel.replace(/\s*\/?\s*\b(padrino|dama)\b\s*/i, '').replace(/^[\s/]+|[\s/]+$/g, '');
+
+  // Expand the sheet rows into one seat per person
+  const tables = SEATING_TABLES.map(t => {
+    const seats = [];
+    t.guests.forEach(([g, name, rel, companions = [], pending = 0]) => {
+      seats.push({ g, name, rel: plainRel(rel), honor: honorOf(rel), pending });
+      companions.forEach(c => {
+        const generic = GENERIC[c.toLowerCase()];
+        seats.push({
+          g,
+          pending,
+          name: generic ? `${generic} de ${firstName(name)}` : c,
+          rel: generic ? '' : `Acompañante de ${firstName(name)}`
+        });
+      });
+    });
+    return { n: t.n, title: t.title, cap: Math.max(t.cap, seats.length), seats };
+  });
+  const byN = Object.fromEntries(tables.map(t => [t.n, t]));
+  const index = tables.flatMap(t => t.seats.map((s, i) => ({ ...s, mesa: t.n, i, norm: norm(s.name) })));
+  const total = index.length;
+  const count = Object.fromEntries(GROUPS.map(g => [g.id, index.filter(s => s.g === g.id).length]));
+
+  // Seat glyphs: the shape (not color) identifies the group
+  const shape = (g, cx, cy, r) => g === 'fa'
+    ? `<circle class="gl solid" cx="${cx}" cy="${cy}" r="${r}"/>`
+    : `<rect class="gl solid am" x="${cx - r * .88}" y="${cy - r * .88}" width="${r * 1.76}" height="${r * 1.76}"/>`;
+
+  const icon = (g, honor) => `<svg viewBox="-10 -10 20 20" aria-hidden="true">${honor ? '<circle class="gl-halo" r="9.4"/>' : ''}${shape(g, 0, 0, 7)}</svg>`;
+
+  // Key for the two marks that are not group filters
+  const renderKey = () => {
+    const main = tables.find(t => t.title);
+    el.key.innerHTML = [
+      index.some(s => s.honor) && `<li>${icon('fa', true)}Padrinos y damas</li>`,
+      main && `<li><svg viewBox="-10 -10 20 20" aria-hidden="true"><circle r="8.5" fill="currentColor"/></svg>Mesa ${pad(main.n)} · ${main.title}</li>`
+    ].filter(Boolean).join('');
+  };
+
+  // Stats
+  const renderStats = () => {
+    el.stats.innerHTML = [
+      [total, 0, 'Invitados'],
+      [tables.length, 0, 'Mesas'],
+      [total / tables.length, 1, 'Por mesa']
+    ].map(([v, dec, label]) => `
+      <div class="seating-stat">
+        <span class="seating-stat-num" data-to="${v}" data-dec="${dec}">${v.toFixed(dec)}</span>
+        <div class="detail-label">${label}</div>
+      </div>`).join('');
+  };
+
+  const countUp = node => {
+    const to = +node.dataset.to;
+    const dec = +node.dataset.dec;
+    if (reduce) return;
+    const start = performance.now();
+    const tick = now => {
+      const p = Math.min((now - start) / 1400, 1);
+      node.textContent = (to * (1 - Math.pow(1 - p, 3))).toFixed(dec);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+
+  // Group filter chips
+  const renderLegend = () => {
+    el.legend.innerHTML = `
+      <button type="button" class="seat-chip is-on" data-chip="all" aria-pressed="true">Todos <b>${total}</b></button>
+      ${GROUPS.map(g => `
+      <button type="button" class="seat-chip" data-chip="${g.id}" aria-pressed="false">${icon(g.id)}${g.label} <b>${count[g.id]}</b></button>`).join('')}`;
+  };
+
+  // Floor plan
+  const renderMap = () => {
+    const { Rt, Rs, r, num, f } = narrow.matches ? SIZES.narrow : SIZES.wide;
+    const [pistaX, pistaY, pistaW, pistaH] = PLAN.pista;
+    const [noviosX, noviosY, noviosW, noviosH] = PLAN.novios;
+    const [sonidoX, sonidoY, sonidoW, sonidoH] = PLAN.sonido;
+    const [fx, fy] = [pistaX + pistaW / 2, pistaY + pistaH / 2];
+    const [nx, ny] = [noviosX + noviosW / 2, noviosY + noviosH / 2];
+
+    const floor = [1, .78, .56].map((s, i) =>
+      `<rect class="floor-ring${i ? '' : ' outer'}" x="${fx - pistaW * s / 2}" y="${fy - pistaH * s / 2}" width="${pistaW * s}" height="${pistaH * s}"/>`
+    ).join('');
+
+    const tbls = tables.filter(t => PLAN.pos[t.n]).map((t, ti) => {
+      const [x, y] = PLAN.pos[t.n];
+      const seats = Array.from({ length: t.cap }, (_, s) => {
+        const a = -Math.PI / 2 + (s / t.cap) * Math.PI * 2;
+        const at = `translate(${(Rs * Math.cos(a)).toFixed(1)} ${(Rs * Math.sin(a)).toFixed(1)})`;
+        const guest = t.seats[s];
+        if (!guest) return `<g transform="${at}"><circle class="gl empty" r="${r - .5}"/></g>`;
+        return `<g class="seat" data-g="${guest.g}" data-mesa="${t.n}" data-i="${s}" transform="${at}" style="--d:${ti * 90 + 250 + s * 40}ms">
+          <g class="seat-in"><circle class="seat-ping" r="${r}"/>${guest.honor ? `<circle class="seat-halo" r="${r + 4.5}"/>` : ''}${shape(guest.g, 0, 0, r)}<circle class="seat-hit" r="${r + 4}"/></g>
+        </g>`;
+      }).join('');
+      return `<g class="tbl${t.title ? ' is-main' : ''}" data-mesa="${t.n}" role="button" tabindex="0" aria-label="Mesa ${t.n}${t.title ? `, ${t.title}` : ''}, ${t.seats.length} invitados" transform="translate(${x} ${y})" style="--i:${ti}">
+        <circle class="tbl-ring" r="${Rs + r + 9}"/>
+        <circle class="tbl-hit" r="${Rs + r + 6}"/>
+        <circle class="tbl-disc" r="${Rt}"/>
+        <text class="tbl-num" dy=".35em" style="font-size:${num}px">${pad(t.n)}</text>
+        ${seats}
+      </g>`;
+    }).join('');
+
+    el.map.innerHTML = `<svg viewBox="0 0 ${PLAN.w} ${PLAN.h}" role="group" aria-label="Plano del salón con las mesas">
+      ${floor}
+      <text class="floor-label" x="${fx}" y="${fy}" dy=".35em" style="font-size:${34 * f}px">Pista</text>
+      <text class="floor-sub" x="${fx}" y="${fy + 34 * f}" style="font-size:${16 * f}px">de baile</text>
+      <rect class="head-table" x="${noviosX}" y="${noviosY}" width="${noviosW}" height="${noviosH}" rx="6"/>
+      <text class="head-label" x="${nx}" y="${ny}" style="font-size:${30 * f}px"><tspan x="${nx}" dy="${-14 * f}">Alina</tspan><tspan x="${nx}" dy="${34 * f}">&amp; Alex</tspan></text>
+      <text class="head-sub" x="${nx}" y="${ny + 58 * f}" style="font-size:${15 * f}px">Novios</text>
+      <rect class="sound-box" x="${sonidoX}" y="${sonidoY}" width="${sonidoW}" height="${sonidoH}" rx="4"/>
+      <text class="floor-sub" transform="translate(${sonidoX + sonidoW / 2} ${sonidoY + sonidoH / 2}) rotate(90)" dy=".35em" style="font-size:${16 * f}px">Sonido</text>
+      ${tbls}
+    </svg>`;
+  };
+
+  // Selected table detail
+  const renderDetail = () => {
+    const t = byN[state.mesa];
+    const free = t.cap - t.seats.length;
+    el.detail.innerHTML = `
+      <button type="button" class="seat-chip seat-back" data-back>↑ Ver plano</button>
+      <div class="detail-label">Mesa${t.title ? `<span class="honor">${t.title}</span>` : ''}</div>
+      <div class="seat-detail-head">
+        <span class="seat-detail-num">${pad(t.n)}</span>
+        <p class="seat-detail-meta">${t.seats.length} invitados${free ? `<br>${free} ${free === 1 ? 'lugar libre' : 'lugares libres'}` : ''}</p>
+      </div>
+      <ol class="seat-list">${t.seats.map((s, i) => `
+        <li class="seat-row${i === state.hit ? ' is-hit' : ''}" data-g="${s.g}" data-i="${i}" style="--r:${i}">
+          ${icon(s.g, s.honor)}
+          <span class="seat-row-name">${s.name}${s.honor ? `<span class="honor">${s.honor}</span>` : ''}${s.pending ? '<em>por confirmar</em>' : ''}</span>
+          <span class="seat-row-rel">${relOf(s)}</span>
+        </li>`).join('')}
+      </ol>`;
+  };
+
+  // State
+  const syncMap = () => {
+    root.querySelectorAll('.tbl').forEach(n => {
+      const on = +n.dataset.mesa === state.mesa;
+      n.classList.toggle('is-active', on);
+      n.setAttribute('aria-pressed', on);
+    });
+    root.querySelectorAll('.seat.is-hit').forEach(n => n.classList.remove('is-hit'));
+    if (state.hit !== null) {
+      root.querySelectorAll(`.seat[data-mesa="${state.mesa}"][data-i="${state.hit}"]`).forEach(n => n.classList.add('is-hit'));
+    }
+  };
+
+  const setHit = i => {
+    state.hit = i;
+    syncMap();
+    root.querySelectorAll('.seat-row').forEach(r => r.classList.toggle('is-hit', +r.dataset.i === i));
+  };
+
+  const peek = i => {
+    root.querySelectorAll('.seat.is-peek').forEach(n => n.classList.remove('is-peek'));
+    if (i === null) return;
+    root.querySelectorAll(`.seat[data-mesa="${state.mesa}"][data-i="${i}"]`).forEach(n => n.classList.add('is-peek'));
+  };
+
+  const setFilter = id => {
+    state.filter = id === 'all' || id === state.filter ? null : id;
+    if (state.filter) root.dataset.filter = state.filter;
+    else delete root.dataset.filter;
+    root.querySelectorAll('[data-chip]').forEach(b => {
+      const on = b.dataset.chip === (state.filter || 'all');
+      b.classList.toggle('is-on', on);
+      b.setAttribute('aria-pressed', on);
+    });
+  };
+
+  const show = (n, hit) => {
+    state.mesa = n;
+    state.hit = hit;
+    renderDetail();
+    syncMap();
+  };
+
+  const reveal = node => {
+    const top = node.getBoundingClientRect().top;
+    if (top < 0 || top > innerHeight * .6) {
+      node.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+  };
+
+  const selectMesa = (n, hit, from) => {
+    show(n, hit);
+    const target = stacked.matches ? el.detail : (from === 'map' ? null : el.board);
+    if (target) reveal(target);
+  };
+
+  // Tooltip
+  const showTip = (node, name, sub) => {
+    tip.innerHTML = `<strong>${name}</strong><span>${sub}</span>`;
+    const box = root.getBoundingClientRect();
+    const r = node.getBoundingClientRect();
+    const half = tip.offsetWidth / 2;
+    const x = Math.min(Math.max(r.left - box.left + r.width / 2, half + 8), box.width - half - 8);
+    tip.style.left = `${x}px`;
+    tip.style.top = `${r.top - box.top}px`;
+    tip.classList.add('on');
+  };
+
+  const hoverSel = 'button, input, .tbl, .seat, .seat-row';
+
+  root.addEventListener('mouseover', e => {
+    cursor.classList.toggle('hover', !!e.target.closest(hoverSel));
+
+    const seat = e.target.closest('.seat');
+    if (seat) {
+      const s = byN[seat.dataset.mesa].seats[seat.dataset.i];
+      showTip(seat, s.name, [s.honor, s.rel || groupOf(s.g).label, `Mesa ${pad(seat.dataset.mesa)}`].filter(Boolean).join(' · '));
+    } else {
+      tip.classList.remove('on');
+    }
+
+    const row = e.target.closest('.seat-row');
+    peek(row ? +row.dataset.i : null);
+  });
+
+  root.addEventListener('mouseleave', () => {
+    cursor.classList.remove('hover');
+    tip.classList.remove('on');
+    peek(null);
+  });
+
+  root.addEventListener('click', e => {
+    const chip = e.target.closest('[data-chip]');
+    if (chip) return setFilter(chip.dataset.chip);
+
+    if (e.target.closest('[data-back]')) {
+      return el.map.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    }
+
+    const res = e.target.closest('[data-res]');
+    if (res) {
+      input.value = res.querySelector('.res-name').textContent;
+      results.innerHTML = '';
+      return selectMesa(+res.dataset.mesa, +res.dataset.i, 'search');
+    }
+
+    const seat = e.target.closest('.seat');
+    if (seat) return selectMesa(+seat.dataset.mesa, +seat.dataset.i, 'map');
+
+    const row = e.target.closest('.seat-row');
+    if (row) return setHit(+row.dataset.i);
+
+    const tbl = e.target.closest('.tbl');
+    if (tbl) selectMesa(+tbl.dataset.mesa, null, 'map');
+  });
+
+  root.addEventListener('keydown', e => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const node = e.target.closest('.tbl');
+    if (!node || node !== e.target) return;
+    e.preventDefault();
+    node.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  });
+
+  // Search
+  input.addEventListener('input', () => {
+    const q = norm(input.value.trim());
+    if (q.length < 2) {
+      results.innerHTML = '';
+      return;
+    }
+    const tokens = q.split(/\s+/);
+    const hits = index.filter(s => tokens.every(t => s.norm.includes(t))).slice(0, 6);
+    results.innerHTML = hits.length
+      ? hits.map(s => `
+        <button type="button" data-res data-mesa="${s.mesa}" data-i="${s.i}">
+          <span class="res-main"><span class="res-name">${s.name}</span>${s.honor ? `<span class="honor">${s.honor}</span>` : ''}</span>
+          <span class="res-mesa">Mesa ${pad(s.mesa)}</span>
+        </button>`).join('')
+      : '<p class="seating-empty">No encontramos ese nombre. Prueba con tu apellido.</p>';
+  });
+
+  input.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const first = results.querySelector('button');
+      if (first) first.click();
+    }
+    if (e.key === 'Escape') {
+      input.value = '';
+      results.innerHTML = '';
+    }
+  });
+
+  // Reveal on scroll
+  const seatingObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in-view');
+      entry.target.querySelectorAll('[data-to]').forEach(countUp);
+      seatingObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  narrow.addEventListener('change', () => {
+    renderMap();
+    syncMap();
+  });
+
+  renderStats();
+  renderLegend();
+  renderKey();
+  renderMap();
+  show(1, null);
+  root.querySelectorAll('.rv').forEach(n => seatingObserver.observe(n));
+})();
 </script>
 
 </body>
