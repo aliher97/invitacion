@@ -3726,8 +3726,10 @@ footer{
 // Groups: fa = Familia (both sides), am = Amigos (friends and work friends, both sides)
 // cap = TOTAL MESA from the sheet; seats without a guest render as free seats
 // title (optional) marks a table on the plan; "Padrino" / "Dama" in the relation mark the wedding party
+// SHOW_HONORS = false hides those marks for now (badge, halo, key and tooltip); set it to true to show them again
+const SHOW_HONORS = false;
 const SEATING_TABLES = [
-  { n: 1, cap: 9, title: 'Familia de los novios', guests: [
+  { n: 1, cap: 10, title: 'Familia de los novios', guests: [
     ['fa', 'Enedina Flores', 'Mamá'],
     ['fa', 'Alejandro Montenegro', 'Padrastro'],
     ['fa', 'Luis Flores', 'Tío / Padrino'],
@@ -3736,7 +3738,8 @@ const SEATING_TABLES = [
     ['fa', 'Ricardo Hernandez Martinez', 'Hermano'],
     ['fa', 'Francisco Javier Hernandez Martinez', 'Hermano / Padrino'],
     ['fa', 'Yolanda Calderon Nava', 'Abuela / Dama'],
-    ['fa', 'Armando Hernandez Tellez', 'Tío']
+    ['fa', 'Armando Hernandez Tellez', 'Tío'],
+    ['fa', 'Juan Roman', '']
   ]},
   { n: 2, cap: 9, guests: [
     ['fa', 'Yolanda Martinez Calderon', 'Tía'],
@@ -4146,7 +4149,7 @@ countdownTimer = setInterval(updateCountdown, 1000);
 
   // The wedding party is flagged in the relation column ("Tío / Padrino", "Dama"): it gets a badge
   // and a halo, and the word leaves the relation line so it is not said twice
-  const honorOf = rel => /\bpadrino\b/i.test(rel) ? 'Padrino' : /\bdama\b/i.test(rel) ? 'Dama' : '';
+  const honorOf = rel => !SHOW_HONORS ? '' : /\bpadrino\b/i.test(rel) ? 'Padrino' : /\bdama\b/i.test(rel) ? 'Dama' : '';
   const plainRel = rel => rel.replace(/\s*\/?\s*\b(padrino|dama)\b\s*/i, '').replace(/^[\s/]+|[\s/]+$/g, '');
 
   // Expand the sheet rows into one seat per person
