@@ -1267,6 +1267,74 @@ footer{
   100%{ opacity:0; transform:scale(3); }
 }
 
+/* Found by name: the rest of the plan steps back, the table inverts and rings out, the seat grows */
+.seating-map svg > *{
+  transition:opacity .5s ease;
+}
+
+.seating[data-found] .seating-map svg > :not(.tbl){
+  opacity:.3;
+}
+
+.seating[data-found] .tbl:not(.is-active){
+  opacity:.18;
+}
+
+.tbl-num{
+  transition:fill .4s ease;
+}
+
+.seating[data-found] .tbl.is-active .tbl-disc{
+  fill:var(--white);
+  stroke:var(--white);
+}
+
+.seating[data-found] .tbl.is-active .tbl-num{
+  fill:var(--black);
+}
+
+.tbl-beacon{
+  fill:none;
+  stroke:var(--white);
+  stroke-width:2;
+  opacity:0;
+  transform-box:fill-box;
+  transform-origin:center;
+  pointer-events:none;
+}
+
+.seating[data-found] .tbl.is-active .tbl-beacon{
+  animation:beacon 2.4s ease-out infinite;
+}
+
+.seating[data-found] .tbl.is-active .tbl-beacon + .tbl-beacon{
+  animation-delay:1.2s;
+}
+
+@keyframes beacon{
+  0%{ opacity:.95; transform:scale(.9); }
+  100%{ opacity:0; transform:scale(2.1); }
+}
+
+.seating[data-found] .seat.is-hit .seat-in{
+  transform:scale(2);
+}
+
+.seating[data-found] .seat.is-hit .seat-ping{
+  stroke-width:2;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .seating[data-found] .tbl.is-active .tbl-beacon{
+    animation:none;
+    opacity:.7;
+  }
+
+  .seating[data-found] .tbl.is-active .tbl-beacon + .tbl-beacon{
+    opacity:0;
+  }
+}
+
 /* Entrance (backwards fill keeps hover and filter states working afterwards) */
 .rv:not(.in-view) .tbl,
 .rv:not(.in-view) .seat{
@@ -4249,6 +4317,8 @@ countdownTimer = setInterval(updateCountdown, 1000);
         </g>`;
       }).join('');
       return `<g class="tbl${t.title ? ' is-main' : ''}" data-mesa="${t.n}" role="button" tabindex="0" aria-label="Mesa ${t.n}${t.title ? `, ${t.title}` : ''}, ${t.seats.length} invitados" transform="translate(${x} ${y})" style="--i:${ti}">
+        <circle class="tbl-beacon" r="${Rs + r + 9}"/>
+        <circle class="tbl-beacon" r="${Rs + r + 9}"/>
         <circle class="tbl-ring" r="${Rs + r + 9}"/>
         <circle class="tbl-hit" r="${Rs + r + 6}"/>
         <circle class="tbl-disc" r="${Rt}"/>
@@ -4340,8 +4410,25 @@ countdownTimer = setInterval(updateCountdown, 1000);
     }
   };
 
+  // A name found by search: the plan dims around its table (CSS reads data-found) and the table is brought to mid-screen
+  const setFound = on => {
+    if (on) root.dataset.found = '';
+    else delete root.dataset.found;
+  };
+
+  const centerOn = node => {
+    const r = node.getBoundingClientRect();
+    scrollTo({ top: Math.max(scrollY + r.top + r.height / 2 - innerHeight / 2, 0), behavior: reduce ? 'auto' : 'smooth' });
+  };
+
   const selectMesa = (n, hit, from) => {
+    setFound(from === 'search');
     show(n, hit);
+    if (from === 'search') {
+      // The whole plan stays in view when it fits, so the table is seen in the room; otherwise the table itself is centred
+      const whole = el.map.getBoundingClientRect().height < innerHeight - 80;
+      return centerOn(whole ? el.map : root.querySelector(`.tbl[data-mesa="${n}"]`));
+    }
     const target = stacked.matches ? el.detail : (from === 'map' ? null : el.board);
     if (target) reveal(target);
   };
@@ -4393,6 +4480,7 @@ countdownTimer = setInterval(updateCountdown, 1000);
     if (res) {
       input.value = res.querySelector('.res-name').textContent;
       results.innerHTML = '';
+      input.blur();
       return selectMesa(+res.dataset.mesa, +res.dataset.i, 'search');
     }
 
@@ -4417,6 +4505,7 @@ countdownTimer = setInterval(updateCountdown, 1000);
   // Search
   input.addEventListener('input', () => {
     const q = norm(input.value.trim());
+    if (!q) setFound(false);
     if (q.length < 2) {
       results.innerHTML = '';
       return;
@@ -4438,6 +4527,7 @@ countdownTimer = setInterval(updateCountdown, 1000);
       if (first) first.click();
     }
     if (e.key === 'Escape') {
+      setFound(false);
       input.value = '';
       results.innerHTML = '';
     }
