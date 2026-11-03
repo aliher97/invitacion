@@ -1774,6 +1774,37 @@ footer{
   white-space:nowrap;
 }
 
+/* Quiet link from a moment to its music card */
+.ag-music{
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  margin-top:14px;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  text-decoration:none;
+  color:var(--gray-500);
+  transition:color .3s ease;
+}
+
+.ag-music::before{
+  content:'';
+  border-style:solid;
+  border-width:4px 0 4px 7px;
+  border-color:transparent transparent transparent currentColor;
+}
+
+.ag-music:hover{
+  color:var(--white);
+}
+
+.ag-music:focus-visible{
+  outline:1px solid var(--white);
+  outline-offset:4px;
+}
+
 /* Node: diamond sitting on the axis, at the end of its branch */
 .ag-node{
   position:absolute;
@@ -2321,6 +2352,316 @@ footer{
   .welcome--live .wm-item:not(.in-view) .wm-body{
     opacity:1;
     transform:none;
+  }
+}
+
+/* Music Section (playlists and songs of the day) */
+.music{
+  padding-top:96px;
+  padding-bottom:96px;
+}
+
+.mu-head{
+  text-align:center;
+  margin-bottom:48px;
+}
+
+.mu-head .label-tag{
+  margin-bottom:28px;
+}
+
+.mu-head .cta-title{
+  margin-bottom:16px;
+  font-size:clamp(30px, 5vw, 44px);
+}
+
+.mu-head .detail-note{
+  max-width:420px;
+  margin:0 auto;
+  padding-right:0;
+  font-size:14px;
+}
+
+.mu-head .detail-note i{
+  color:var(--gray-500);
+}
+
+/* One quiet row per song; its player opens inside the row and only loads then (no third-party requests until a guest asks) */
+.mu-list{
+  max-width:680px;
+  margin:0 auto;
+  list-style:none;
+  border-bottom:1px solid var(--gray-800);
+}
+
+.mu-item{
+  position:relative;
+  border-top:1px solid var(--gray-800);
+  scroll-margin-top:40px;
+}
+
+.mu-item::before{
+  content:'';
+  position:absolute;
+  top:-1px;
+  left:0;
+  width:0;
+  height:1px;
+  background:var(--white);
+  transition:width .6s cubic-bezier(.215,.61,.355,1);
+}
+
+.mu-item.is-open::before{
+  width:100%;
+}
+
+.mu-h{
+  font:inherit;
+}
+
+.mu-row{
+  display:grid;
+  grid-template-columns:22px minmax(0, 1fr) auto 34px;
+  grid-template-areas:'num main at go';
+  align-items:center;
+  column-gap:14px;
+  width:100%;
+  padding:18px 0;
+  border:0;
+  background:none;
+  color:var(--white);
+  font:inherit;
+  text-align:left;
+  cursor:none;
+}
+
+.mu-row:focus-visible{
+  outline:1px solid var(--white);
+  outline-offset:2px;
+}
+
+.mu-num{
+  grid-area:num;
+  font-family:'Cormorant Garamond', serif;
+  font-size:18px;
+  font-weight:300;
+  font-style:italic;
+  font-variant-numeric:lining-nums;
+  line-height:1;
+  color:var(--gray-600);
+  transition:color .3s ease;
+}
+
+.mu-main{
+  grid-area:main;
+  display:grid;
+  gap:4px;
+  min-width:0;
+}
+
+.mu-kicker{
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gray-500);
+}
+
+.mu-title{
+  font-family:'Cormorant Garamond', serif;
+  font-size:22px;
+  font-weight:400;
+  line-height:1.2;
+  letter-spacing:-.01em;
+}
+
+.mu-at{
+  grid-area:at;
+  font-family:'Cormorant Garamond', serif;
+  font-size:17px;
+  font-weight:300;
+  font-style:italic;
+  font-variant-numeric:lining-nums;
+  line-height:1;
+  color:var(--gray-300);
+}
+
+.mu-at small{
+  margin-left:6px;
+  font-family:'Inter', system-ui, sans-serif;
+  font-size:9px;
+  font-style:normal;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+  color:var(--gray-500);
+}
+
+.mu-glyph{
+  grid-area:go;
+  display:grid;
+  place-items:center;
+  width:34px;
+  height:34px;
+  border:1px solid var(--gray-600);
+  border-radius:50%;
+  transition:background .3s ease, border-color .3s ease, color .3s ease;
+}
+
+.mu-glyph::before{
+  content:'';
+  margin-left:2px;
+  border-style:solid;
+  border-width:5px 0 5px 8px;
+  border-color:transparent transparent transparent currentColor;
+}
+
+.mu-row:hover .mu-glyph,
+.mu-item.is-open .mu-glyph{
+  background:var(--white);
+  border-color:var(--white);
+  color:var(--black);
+}
+
+/* Open: the play triangle turns into a dash that closes the row */
+.mu-item.is-open .mu-glyph::before{
+  width:10px;
+  margin-left:0;
+  border-width:1px 0 0;
+  border-color:currentColor;
+}
+
+.mu-drawer{
+  display:grid;
+  grid-template-rows:0fr;
+  visibility:hidden;
+  transition:grid-template-rows .45s cubic-bezier(.215,.61,.355,1), visibility 0s .45s;
+}
+
+.mu-item.is-open .mu-drawer{
+  grid-template-rows:1fr;
+  visibility:visible;
+  transition:grid-template-rows .45s cubic-bezier(.215,.61,.355,1), visibility 0s;
+}
+
+.mu-list.is-jumping .mu-drawer{
+  transition:none;
+}
+
+.mu-inner{
+  min-height:0;
+  overflow:hidden;
+}
+
+.mu-panel{
+  padding:2px 0 26px 36px;
+}
+
+.mu-text{
+  font-size:14px;
+  font-weight:300;
+  line-height:1.8;
+  letter-spacing:.02em;
+  color:var(--gray-300);
+}
+
+.mu-media{
+  position:relative;
+  height:152px;
+  margin-top:18px;
+  border-radius:12px;
+  background:var(--gray-900);
+}
+
+.mu-youtube .mu-media{
+  height:auto;
+  max-width:480px;
+  aspect-ratio:16 / 9;
+  border-radius:0;
+}
+
+.mu-media iframe{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border:0;
+  border-radius:inherit;
+}
+
+.mu-open{
+  display:inline-block;
+  margin-top:18px;
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+}
+
+/* Reveal on scroll */
+.mu-head,
+.mu-item{
+  transition:opacity .9s ease, transform .9s cubic-bezier(.215,.61,.355,1);
+}
+
+.music--live .mu-head:not(.in-view),
+.music--live .mu-item:not(.in-view){
+  opacity:0;
+  transform:translateY(24px);
+}
+
+@media(min-width:700px){
+  .mu-head{
+    margin-bottom:56px;
+  }
+
+  .mu-row{
+    grid-template-columns:32px minmax(0, 1fr) auto 40px;
+    column-gap:24px;
+    padding:22px 0;
+  }
+
+  .mu-num{
+    font-size:20px;
+  }
+
+  .mu-title{
+    font-size:26px;
+  }
+
+  .mu-at{
+    font-size:20px;
+  }
+
+  .mu-glyph{
+    width:40px;
+    height:40px;
+  }
+
+  .mu-panel{
+    padding-left:56px;
+  }
+}
+
+@media(hover:hover){
+  .mu-item:hover::before{
+    width:100%;
+  }
+
+  .mu-item:hover .mu-num{
+    color:var(--gray-300);
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .music--live .mu-head:not(.in-view),
+  .music--live .mu-item:not(.in-view){
+    opacity:1;
+    transform:none;
+  }
+
+  .mu-drawer,
+  .mu-item.is-open .mu-drawer{
+    transition:none;
   }
 }
 
@@ -3762,6 +4103,25 @@ footer{
   <!-- Divider -->
   <div class="divider-line"></div>
 
+  <!-- Music Section -->
+  <section class="details music" id="musica" aria-labelledby="mu-heading">
+    <header class="mu-head">
+      <div class="label-tag">
+        <span>Música</span>
+      </div>
+      <h2 class="cta-title" id="mu-heading">La música de nuestro día</h2>
+      <p class="detail-note">
+        Armamos una lista para cada momento.<br>
+        <i>Dale play desde ahora y ve entrando en ambiente.</i>
+      </p>
+    </header>
+
+    <ol class="mu-list" id="mu-list" role="list"></ol>
+  </section>
+
+  <!-- Divider -->
+  <div class="divider-line"></div>
+
   <!-- Agenda Section -->
   <section class="details agenda" id="agenda">
     <header class="agenda-head">
@@ -3860,13 +4220,14 @@ const SEATING_TABLES = [
     ['am', 'Victor Jimenez', '', ['San Juana Aurora Ramirez de Jimenez']],
     ['am', 'Mariana (Colombia)', '']
   ]},
-  { n: 7, cap: 9, guests: [
-    ['am', 'Holbeing Cisneros', ''],
-    ['am', 'Xochitl Corona', ''],
-    ['am', 'Ernesto Balandran', '', ['Esposa'], 1],
+  { n: 7, cap: 10, guests: [
+    ['am', 'Holbeing Cisneros', '', ['Esposa']],
+    ['am', 'Xochil Corona', ''],
     ['am', 'Jael Barron', ''],
     ['am', 'Arturo Guevara', '', ['Esposa']],
-    ['am', 'Karen Pacheco', '', ['Esposo']]
+    ['am', 'Karen Pacheco', '', ['Esposo']],
+    ['am', 'Zaira Jimenez', ''],
+    ['am', 'Armando Milan', '']
   ]},
   { n: 8, cap: 10, guests: [
     ['am', 'Pablo Cid', ''],
@@ -3907,8 +4268,7 @@ const SEATING_TABLES = [
     ['am', 'Humberto Ramírez', ''],
     ['am', 'Rita Garduño', ''],
     ['am', 'Erika', '', ['Brandon Resendiz']],
-    ['am', 'Zaira Jimenez', ''],
-    ['am', 'Armando Milan', '']
+    ['am', 'Luis Chabacano', '', ['Esposa']]
   ]}
 ];
 </script>
@@ -3917,19 +4277,34 @@ const SEATING_TABLES = [
 // Agenda data (edit here when the schedule changes)
 // side: l | r = which side of the axis the branch falls on; kind: open | close | party = centered on the axis
 // time (optional) anchors the moment; without it the moment renders quieter. secret hides the title ("?")
+// music (optional) = id of a MUSIC entry: the moment links to it, and that card takes its time from here
 const AGENDA = [
-  { kind: 'open', time: '4:30 pm', title: 'Recepción' },
+  { kind: 'open', time: '4:30 pm', title: 'Recepción', music: 'recepcion' },
   { side: 'l', time: '5:00 pm', title: 'Boda civil' },
   { side: 'r', title: 'Entrada de los recién casados' },
-  { side: 'r', time: '5:30 pm', title: 'Comida' },
-  { side: 'l', time: '6:30 pm', title: 'Vals' },
+  { side: 'r', time: '6:30 pm', title: 'Comida', music: 'comida' },
+  { side: 'l', time: '7:30 pm', title: 'Vals', music: 'vals' },
   { side: 'r', title: 'Video' },
   { side: 'r', title: '?', secret: true },
   { side: 'r', title: 'Brindis' },
-  { side: 'r', title: 'Víbora de la mar' },
-  { side: 'l', time: '8:00 pm', title: 'Pastel' },
+  { side: 'r', title: 'Víbora de la mar', music: 'vibora-hombres' },
+  { side: 'l', time: '9:00 pm', title: 'Pastel' },
   { kind: 'party', title: 'A la pista de baile' },
-  { kind: 'close', time: '11:00 pm', title: 'Gracias por haber sido parte' }
+  { kind: 'close', time: '12:00 am', title: 'Gracias por haber sido parte' }
+];
+</script>
+
+<script>
+// Music data (edit here when the songs change)
+// src: spotify | youtube; type (spotify only): playlist | track; ref = the id inside the share link
+// kicker names the moment; its time comes from the AGENDA entry whose music is this id (none = no time shown)
+const MUSIC = [
+  { id: 'recepcion', src: 'spotify', type: 'playlist', ref: '5pD8rQ0jYtah8HpL5UHpgG', kicker: 'Recepción', title: 'Para recibirte', text: 'Lo que sonará mientras llegas y te acomodas en la recepción.' },
+  { id: 'comida', src: 'spotify', type: 'playlist', ref: '1rhjXcNQXENvyAV3iWvVB8', kicker: 'Comida', title: 'Para la comida', text: 'Lo que sonará mientras compartimos la mesa.' },
+  { id: 'vals', src: 'spotify', type: 'track', ref: '0O6GYVGXctDNaczOuhYk9d', kicker: 'Vals', title: 'Nuestro vals', text: 'La canción con la que bailaremos nuestro vals.' },
+  { id: 'familia', src: 'youtube', ref: 'KB2Juz2ZTAI', kicker: 'Con la familia', title: 'Un baile en familia', text: 'La canción que bailaremos con nuestra familia cercana.' },
+  { id: 'vibora-hombres', src: 'spotify', type: 'track', ref: '56UhRf79EjvGayo0tgyLV8', kicker: 'Víbora de la mar', title: 'Para ellos', text: 'La canción de la víbora de la mar para los hombres.' },
+  { id: 'vibora-mujeres', src: 'spotify', type: 'track', ref: '3l9CW99AHtExIRV4hW2N5m', kicker: 'Víbora de la mar', title: 'Para ellas', text: 'La canción de la víbora de la mar para las mujeres.' }
 ];
 </script>
 
@@ -4578,6 +4953,7 @@ countdownTimer = setInterval(updateCountdown, 1000);
         <div class="ag-body">
           ${a.time ? clockOf(a.time) : ''}
           <span class="ag-title">${titleOf(a)}</span>
+          ${a.music ? `<a class="ag-music" href="#musica-${a.music}" aria-label="Escuchar la música: ${a.title}">Escuchar</a>` : ''}
         </div>
       </div>
       ${a.kind === 'party' ? '' : '<span class="ag-node" aria-hidden="true"></span>'}
@@ -4651,6 +5027,124 @@ countdownTimer = setInterval(updateCountdown, 1000);
 
   section.classList.add('welcome--live');
   section.querySelectorAll('.wm-head, .wm-item').forEach(n => welcomeObserver.observe(n));
+})();
+
+// Music
+(() => {
+  const section = document.getElementById('musica');
+  const list = document.getElementById('mu-list');
+
+  const clockOf = time => {
+    const [clock, meridiem] = time.split(' ');
+    return `<span class="mu-at">${clock}<small>${meridiem}</small></span>`;
+  };
+
+  const urlOf = m => m.src === 'youtube' ? `https://youtu.be/${m.ref}` : `https://open.spotify.com/${m.type}/${m.ref}`;
+  const embedOf = m => m.src === 'youtube'
+    ? `https://www.youtube-nocookie.com/embed/${m.ref}?autoplay=1&rel=0&playsinline=1`
+    : `https://open.spotify.com/embed/${m.type}/${m.ref}?utm_source=generator&theme=0`;
+  const appOf = m => m.src === 'youtube' ? 'YouTube' : 'Spotify';
+  const whatOf = m => m.src === 'youtube' ? 'Video' : m.type === 'playlist' ? 'Playlist' : 'Canción';
+
+  list.innerHTML = MUSIC.map((m, i) => {
+    const at = AGENDA.find(a => a.music === m.id)?.time;
+    return `
+    <li class="mu-item mu-${m.src}" id="musica-${m.id}" data-i="${i}">
+      <h3 class="mu-h">
+        <button type="button" class="mu-row" aria-expanded="false" aria-controls="musica-${m.id}-panel">
+          <span class="mu-num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+          <span class="mu-main">
+            <span class="mu-kicker">${m.kicker}</span>
+            <span class="mu-title">${m.title}</span>
+          </span>
+          ${at ? clockOf(at) : ''}
+          <span class="mu-glyph" aria-hidden="true"></span>
+        </button>
+      </h3>
+      <div class="mu-drawer" id="musica-${m.id}-panel">
+        <div class="mu-inner">
+          <div class="mu-panel">
+            <p class="mu-text">${m.text}</p>
+            <div class="mu-media"></div>
+            <a class="wm-link mu-open" href="${urlOf(m)}" target="_blank" rel="noopener noreferrer">Abrir en ${appOf(m)}<span class="wm-sr"> (se abre en una pestaña nueva)</span></a>
+          </div>
+        </div>
+      </div>
+    </li>`;
+  }).join('');
+
+  // The player is created when its row opens, so nothing from Spotify or YouTube loads until a guest asks for it
+  const setOpen = (item, on) => {
+    const m = MUSIC[+item.dataset.i];
+    const box = item.querySelector('.mu-media');
+    item.classList.toggle('is-open', on);
+    item.querySelector('.mu-row').setAttribute('aria-expanded', on);
+    if (!on) {
+      // Removing the player is what stops the song
+      box.replaceChildren();
+      return;
+    }
+    const frame = document.createElement('iframe');
+    frame.src = embedOf(m);
+    frame.title = `${m.title} · ${whatOf(m)} en ${appOf(m)}`;
+    frame.allow = m.src === 'youtube'
+      ? 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+      : 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+    frame.allowFullscreen = true;
+    frame.referrerPolicy = 'strict-origin-when-cross-origin';
+    box.replaceChildren(frame);
+  };
+
+  // One song at a time
+  const flip = item => {
+    const on = !item.classList.contains('is-open');
+    if (on) list.querySelectorAll('.mu-item.is-open').forEach(o => setOpen(o, false));
+    setOpen(item, on);
+  };
+
+  list.addEventListener('click', e => {
+    const row = e.target.closest('.mu-row');
+    if (row) flip(row.closest('.mu-item'));
+  });
+
+  // "Escuchar" in the minute-by-minute opens the row and scrolls to it; a row above it may close meanwhile, so that happens without animation and the scroll aims at where it ends up
+  document.getElementById('ag-list').addEventListener('click', e => {
+    const link = e.target.closest('.ag-music');
+    const item = link && document.getElementById(link.hash.slice(1));
+    if (!item) return;
+    e.preventDefault();
+    list.classList.add('is-jumping');
+    if (!item.classList.contains('is-open')) flip(item);
+    item.scrollIntoView({ block: 'start' });
+    list.classList.remove('is-jumping');
+  });
+
+  // Same cursor reaction as the detail blocks; the page cannot track the pointer inside a player, so the ring steps aside there
+  const away = on => {
+    cursor.style.opacity = on ? '0' : '';
+    cursorDot.style.opacity = on ? '0' : '';
+  };
+  list.addEventListener('mouseover', e => {
+    const onPlayer = !!e.target.closest('iframe');
+    away(onPlayer);
+    cursor.classList.toggle('hover', !onPlayer && !!e.target.closest('.mu-item'));
+  });
+  list.addEventListener('mouseleave', () => {
+    away(false);
+    cursor.classList.remove('hover');
+  });
+
+  // Reveal on scroll
+  const musicObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add('in-view');
+      musicObserver.unobserve(entry.target);
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  section.classList.add('music--live');
+  section.querySelectorAll('.mu-head, .mu-item').forEach(n => musicObserver.observe(n));
 })();
 </script>
 
