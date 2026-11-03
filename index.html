@@ -4268,7 +4268,7 @@ const SEATING_TABLES = [
     ['am', 'Humberto Ramírez', ''],
     ['am', 'Rita Garduño', ''],
     ['am', 'Erika', '', ['Brandon Resendiz']],
-    ['am', 'Luis Chabacano', '', ['Esposa']]
+    ['am', 'Luis Chavacano', '', ['Esposa de Luis Chavacano']]
   ]}
 ];
 </script>
@@ -4602,11 +4602,13 @@ countdownTimer = setInterval(updateCountdown, 1000);
       seats.push({ g, name, rel: plainRel(rel), honor: honorOf(rel), pending });
       companions.forEach(c => {
         const generic = GENERIC[c.toLowerCase()];
+        // Written out ("Esposa de Luis Chavacano") it stays as typed: the first name alone can be ambiguous
+        const spelled = /^(esposo|esposa) de /i.test(c);
         seats.push({
           g,
           pending,
           name: generic ? `${generic} de ${firstName(name)}` : c,
-          rel: generic ? '' : `Acompañante de ${firstName(name)}`
+          rel: generic || spelled ? '' : `Acompañante de ${firstName(name)}`
         });
       });
     });
