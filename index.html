@@ -736,6 +736,14 @@ footer{
   color:var(--gray-600);
 }
 
+.footer-credit{
+  margin-top:48px;
+  font-family:'Cormorant Garamond', serif;
+  font-size:16px;
+  font-style:italic;
+  color:var(--gray-500);
+}
+
 /* Geometric Elements */
 .geo-circle{
   position:fixed;
@@ -4072,7 +4080,7 @@ footer{
       <h2 class="cta-title">Encuentra tu lugar</h2>
       <p class="detail-note">
         Cada mesa reúne a quienes más queremos.<br>
-        <i>Versión preliminar · la distribución puede cambiar</i>
+        <i>Distribución final de mesas</i>
       </p>
     </header>
 
@@ -4091,7 +4099,7 @@ footer{
         <div class="seating-map rv" id="seat-map"></div>
         <ul class="seating-key" id="seat-key"></ul>
         <p class="seating-caption">
-          Plano del salón. La ubicación de cada lugar dentro de la mesa es aproximada y puede cambiar.
+          Plano del salón. La ubicación de cada lugar dentro de la mesa es aproximada.
         </p>
       </div>
       <aside class="seating-detail rv" id="seat-detail" aria-live="polite"></aside>
@@ -4144,6 +4152,7 @@ footer{
       <div class="footer-date">21 Noviembre, 2026</div>
       <div class="footer-heart">♥</div>
       <div class="footer-text">Alina & Alex</div>
+      <p class="footer-credit" lang="en">Developed by Alina Hernandez</p>
     </div>
   </footer>
 </div>
@@ -4154,8 +4163,8 @@ footer{
 // Groups: fa = Familia (both sides), am = Amigos (friends and work friends, both sides)
 // cap = TOTAL MESA from the sheet; seats without a guest render as free seats
 // title (optional) marks a table on the plan; "Padrino" / "Dama" in the relation mark the wedding party
-// SHOW_HONORS = false hides those marks for now (badge, halo, key and tooltip); set it to true to show them again
-const SHOW_HONORS = false;
+// SHOW_HONORS = false hides those marks (badge, halo, key and tooltip); true shows them
+const SHOW_HONORS = true;
 const SEATING_TABLES = [
   { n: 1, cap: 10, title: 'Familia de los novios', guests: [
     ['fa', 'Enedina Flores', 'Mamá'],
@@ -4165,7 +4174,7 @@ const SEATING_TABLES = [
     ['fa', 'Leticia Martinez', 'Mamá'],
     ['fa', 'Ricardo Hernandez Martinez', 'Hermano'],
     ['fa', 'Francisco Javier Hernandez Martinez', 'Hermano / Padrino'],
-    ['fa', 'Yolanda Calderon Nava', 'Abuela / Dama'],
+    ['fa', 'Yolanda Calderon Nava', 'Abuela'],
     ['fa', 'Armando Hernandez Tellez', 'Tío'],
     ['fa', 'Juan Roman', '']
   ]},
@@ -4195,7 +4204,7 @@ const SEATING_TABLES = [
     ['fa', 'Miguel Flores', 'Tío'],
     ['fa', 'Nancy Jacome', 'Tía'],
     ['fa', 'Emiliano Flores', 'Primo'],
-    ['fa', 'Sofía Flores', 'Prima / Dama'],
+    ['fa', 'Sofía Flores', 'Prima'],
     ['fa', 'Raúl Roman', 'Tío'],
     ['fa', 'Patricia Meneses', 'Conocida de la familia'],
     ['fa', 'Mayra Roman', 'Prima', ['Jovita Martinez', 'Victoria / Barbara (niña)']]
@@ -4236,7 +4245,7 @@ const SEATING_TABLES = [
     ['am', 'Cesar Garcia', ''],
     ['am', 'Mariana Jacobo', ''],
     ['am', 'Litzy Aboytes', 'Dama'],
-    ['am', 'Mariana Hernandez', ''],
+    ['am', 'Mariana Hernandez', 'Dama'],
     ['am', 'Enrrique Amate', ''],
     ['am', 'Elizabeth Uribe', ''],
     ['am', 'Paola Guerrero', '']
@@ -4262,7 +4271,7 @@ const SEATING_TABLES = [
     ['am', 'Fabian Rios', '', ['Liliana Rios'], 1]
   ]},
   { n: 11, cap: 10, guests: [
-    ['am', 'Vanesa Gallardo', '', ['Betochin (niño)']],
+    ['am', 'Vanesa Gallardo', 'Dama', ['Betochin (niño)']],
     ['am', 'Humberto Lopez', ''],
     ['am', 'Sofía Gonzalez', 'Dama'],
     ['am', 'Humberto Ramírez', ''],
